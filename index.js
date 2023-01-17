@@ -66,7 +66,7 @@ app.get('/:col/:key', async (req, res) => {
     //console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
     const items = await db.collection(col).list()
     //console.log(JSON.stringify(items, null, 2))
-    console.log(cols)
+    console.log(col)
     console.log(items)
     res.json(items).end()
   })
