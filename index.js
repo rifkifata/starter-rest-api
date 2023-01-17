@@ -61,14 +61,30 @@ app.get('/:col/:key', async (req, res) => {
 // })
   
 //get all
-  app.get('/:col', async (req, res) => {
+  app.get('/all', async (req, res) => {
     const col = req.params.col
     //console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
     const items = await db.collection(col).list()
+    //const item = await db.collection(col).get(key)
     //console.log(JSON.stringify(items, null, 2))
-    console.log(col)
-    console.log(items)
+    console.log(col) //nama colom (cekgung)
+    console.log(items) 
+    // {
+    //   results: [
+    //     { collection: 'cekgung', key: 'id', props: [Object] },
+    //     { collection: 'cekgung', key: 'asu', props: [Object] },
+    //     { collection: 'cekgung', key: 'asu2', props: [Object] }
+    //   ]
+    // }
+    console.log(items.results[0])
+    console.log(items.results)
     res.json(items).end()
+    //let akhir = res.json(items).end()
+    //let array = []
+    //for (){
+    //  array.push(value)
+    //}
+    //console.log(array)
   })
 
 // Catch all handler for all other request.
