@@ -80,9 +80,10 @@ app.get('/:col', async (req, res) => {
     const key = result[i]
     const item = await db.collection(col).get(key)
     penampung.push(item)
+    console.log ("ini penampung ke - "+i+item)
   }
-  console.log(penampung)
-  
+  console.log("hasil akhir : " + penampung)
+
 })
 
 // Catch all handler for all other request.
