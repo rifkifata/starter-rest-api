@@ -67,11 +67,13 @@ app.get('/:col', async (req, res) => {
   const items = await db.collection(col).list()
   console.log(JSON.stringify(items, null, 2))
   res.json(items).end()
-  let abc = items.results.map((item) => ({
-    collection: item.collection,
-    key: item.key
-  }))
-  console.log(abc)
+  // let arrayOfObject = items.results.map((item) => ({
+  //   key: item.key
+  // }))
+  //console.log(abc)
+  let result = items.results.map(a => a.key)
+  console.log(result)
+
 })
 
 // Catch all handler for all other request.
