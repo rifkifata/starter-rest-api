@@ -74,6 +74,15 @@ app.get('/:col', async (req, res) => {
   let result = items.results.map(a => a.key)
   console.log(result)
 
+  //nembak by key
+  let penampung = []
+  for (let i = 0;i<result.length;i++){
+    const key = result[i]
+    const item = await db.collection(col).get(key)
+    penampung.push(item)
+  }
+  console.log(penampung)
+  
 })
 
 // Catch all handler for all other request.
