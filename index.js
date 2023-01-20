@@ -76,8 +76,11 @@ app.get('/:col/:key', async (req, res) => {
     //     { collection: 'cekgung', key: 'asu2', props: [Object] }
     //   ]
     // }
-    console.log(items.results[0])
-    console.log(items.results)
+    arrayA = items.results
+    arrayA.map(function(value) {
+      return value.key
+    });
+    console.log(arrayA)
     res.json(items).end()
     //let akhir = res.json(items).end()
     //let array = []
@@ -86,6 +89,20 @@ app.get('/:col/:key', async (req, res) => {
     //}
     //console.log(array)
   })
+
+  var dynamoClient = db.DocumentClient();
+  var params = {
+    TableName: col, // give it your table name 
+    Select: "ALL_ATTRIBUTES"
+  };
+
+  dynamoClient.scan(params, function(err, data) {
+    if (err) {
+       console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+       console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+    }
+  });
 
 // Catch all handler for all other request.
 app.use('*', (req, res) => {
