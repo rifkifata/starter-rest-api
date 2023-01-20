@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const db = require('@cyclic.sh/dynamodb')
+let AWS = require('aws-sdk');
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -67,8 +68,8 @@ app.get('/:col/:key', async (req, res) => {
     const items = await db.collection(col).list()
     //const item = await db.collection(col).get(key)
     //console.log(JSON.stringify(items, null, 2))
-    console.log(col) //nama colom (cekgung)
-    console.log(items) 
+    //console.log(col) //nama colom (cekgung)
+    //console.log(items) 
     // {
     //   results: [
     //     { collection: 'cekgung', key: 'id', props: [Object] },
@@ -76,21 +77,38 @@ app.get('/:col/:key', async (req, res) => {
     //     { collection: 'cekgung', key: 'asu2', props: [Object] }
     //   ]
     // }
-    arrayA = items.results
-    arrayA.map(function(value) {
-      return value.key
-    });
-    console.log(arrayA)
-    res.json(items).end()
+    // arrayA = items.results
+    // arrayA.map(function(value) {
+    //   return value.key
+    // });
+    // console.log(arrayA)
+    // res.json(items).end()
     //let akhir = res.json(items).end()
     //let array = []
     //for (){
     //  array.push(value)
     //}
     //console.log(array)
-  })
 
-  var dynamoClient = db.DocumentClient();
+  //   export const scanTable = async (tableName) => {
+  //     const params = {
+  //         TableName: tableName,
+  //     };
+  
+  //     const scanResults = [];
+  //     const items;
+  //     do{
+  //         items =  await documentClient.scan(params).promise();
+  //         items.Items.forEach((item) => scanResults.push(item));
+  //         params.ExclusiveStartKey  = items.LastEvaluatedKey;
+  //     }while(typeof items.LastEvaluatedKey !== "undefined");
+      
+  //     return scanResults;
+  
+  // };
+  // })
+
+  var dynamoClient = new AWS.DynamoDB.DocumentClient();
   var params = {
     TableName: col, // give it your table name 
     Select: "ALL_ATTRIBUTES"
@@ -102,7 +120,8 @@ app.get('/:col/:key', async (req, res) => {
     } else {
        console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
     }
-  });
+  })
+})
 
 // Catch all handler for all other request.
 app.use('*', (req, res) => {
