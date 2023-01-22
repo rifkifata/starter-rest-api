@@ -86,8 +86,11 @@ app.get('/getall/:col', async (req, res) => {
         return item
     })
 
-    let finalResult = { "result" : currentArray}
-    res.json(finalResult).end()
+    let finalResult = { "result": currentArray }
+    if (finalResult == { "result": [] }) {
+        res.json("koccong").end()
+    }
+    else res.json(finalResult).end()
 })
 
 // Catch all handler for all other request.
