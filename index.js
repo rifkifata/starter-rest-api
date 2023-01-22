@@ -62,7 +62,7 @@ app.get('/:col/:key', async (req, res) => {
  })*/
 
 //get All
-app.get('/:col', async (req, res) => {
+app.get('getall/:col', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
