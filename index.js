@@ -53,30 +53,23 @@ app.get('/:col/:key', async (req, res) => {
 })
 
 //Get a full listing
- /*app.get('/:col', async (req, res) => {
+ app.get('/:col', async (req, res) => {
    const col = req.params.col
    console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
    const items = await db.collection(col).list()
    console.log(JSON.stringify(items, null, 2))
    res.json(items).end()
- })*/
+ })
 
 //get All
-app.get('/:col', async (req, res) => {
+app.get('/:col/getAll', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
-  //console.log(JSON.stringify(items, null, 2))
   
-
-  // let arrayOfObject = items.results.map((item) => ({
-  //   key: item.key
-  // }))
-  //console.log(abc)
   let result = items.results.map(a => a.key)
-  //console.log(result)
-    let currentArray = []
-  //nembak by key
+  let currentArray = []
+  
     await Promise.all(
         result.map(async (item) => {
             currentArray.push(await db.collection(col).get(item))
@@ -90,9 +83,8 @@ app.get('/:col', async (req, res) => {
         return item
     })
 
-
-    console.log("ini array" + currentArray)
-    await res.json(currentArray).end()
+    let result = { "result" : currentArray}
+    await res.json(result).end()
 
 })
 
