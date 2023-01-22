@@ -53,16 +53,16 @@ app.get('/:col/:key', async (req, res) => {
 })
 
 //Get a full listing
-// app.get('/:col', async (req, res) => {
-//   const col = req.params.col
-//   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
-//   const items = await db.collection(col).list()
-//   console.log(JSON.stringify(items, null, 2))
-//   res.json(items).end()
-// })
+ app.get('/:col', async (req, res) => {
+   const col = req.params.col
+   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
+   const items = await db.collection(col).list()
+   console.log(JSON.stringify(items, null, 2))
+   res.json(items).end()
+ })
 
 //get All
-app.get('/:col', async (req, res) => {
+app.get('/:col/getAll', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
@@ -82,10 +82,18 @@ app.get('/:col', async (req, res) => {
             currentArray.push(await db.collection(col).get(item))
         })
     )
-    
+
+    currentArray.map(item => {
+        Object.assign(item, item.props)
+        delete item.props;
+
+        return item
+    })
+
+
     console.log("ini array" + currentArray)
     await res.json(currentArray).end()
-    
+
 })
 
 // Catch all handler for all other request.
