@@ -26,12 +26,12 @@ app.use(express.urlencoded({ extended: true }))
 app.post('/:col', async (req, res) => {
   console.log(req.body)
 
-    const objectId = new ObjectID();
+  const objectId = new ObjectID();
   const col = req.params.col
   //const key = req.params.key
-  const key = objectId
+  let key = objectId.toString()
 
-    console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
+  console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
   const item = await db.collection(col).set(key, req.body)
   console.log(JSON.stringify(item, null, 2))
   res.json(item).end()
