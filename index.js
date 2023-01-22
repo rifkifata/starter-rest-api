@@ -75,6 +75,7 @@ app.get('/:col', async (req, res) => {
   //console.log(abc)
   let result = items.results.map(a => a.key)
   //console.log(result)
+    let currentArray = []
   //nembak by key
     await Promise.all(
         result.map(async (item) => {
