@@ -66,7 +66,7 @@ app.get('/:col', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
-  console.log(JSON.stringify(items, null, 2))
+  //console.log(JSON.stringify(items, null, 2))
   res.json(items).end()
 
   // let arrayOfObject = items.results.map((item) => ({
@@ -74,13 +74,13 @@ app.get('/:col', async (req, res) => {
   // }))
   //console.log(abc)
   let result = items.results.map(a => a.key)
-  console.log(result)
+  //console.log(result)
     let currentArray = []
   //nembak by key
     const getbyone = Promise.all(
         result.map(async (item) => {
             const response = await db.collection(col).get(item)
-            currentArray.push(response);
+            console.log(response);
         })
     )
 
@@ -90,7 +90,6 @@ app.get('/:col', async (req, res) => {
         return item
     })*/
 
-    console.log("ini" + getbyone)
     
 })
 
