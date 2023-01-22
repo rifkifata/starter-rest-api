@@ -53,16 +53,16 @@ app.get('/:col/:key', async (req, res) => {
 })
 
 //Get a full listing
- app.get('/:col', async (req, res) => {
+ /*app.get('/:col', async (req, res) => {
    const col = req.params.col
    console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
    const items = await db.collection(col).list()
    console.log(JSON.stringify(items, null, 2))
    res.json(items).end()
- })
+ })*/
 
 //get All
-app.get('/:col/getAll', async (req, res) => {
+app.get('/:col', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
