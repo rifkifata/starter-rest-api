@@ -83,8 +83,8 @@ app.get('/:col', async (req, res) => {
         return item
     })
 
-    let result = { "result" : currentArray}
-    await res.json(result).end()
+    //let result = { "result" : currentArray}
+    await res.json(currentArray).end()
 
 })
 
