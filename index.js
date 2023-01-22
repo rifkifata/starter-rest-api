@@ -47,13 +47,13 @@ app.get('/getbykey/:col/:key', async (req, res) => {
   const col = req.params.col
   const key = req.params.key
   console.log(`from collection: ${col} get key: ${key} with params ${JSON.stringify(req.params)}`)
-  const item = await db.collection(col).get(key)
+  let item = await db.collection(col).get(key)
   console.log(JSON.stringify(item, null, 2))
   res.json(item).end()
 })
 
-//Get a full listing
- /*app.get('/:col', async (req, res) => {
+//Get all full listing
+ /*app.get('/getfull/:col', async (req, res) => {
    const col = req.params.col
    console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
    const items = await db.collection(col).list()
@@ -66,7 +66,6 @@ app.get('/getall/:col', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
-  
   let result = items.results.map(a => a.key)
   let currentArray = []
   
@@ -76,15 +75,14 @@ app.get('/getall/:col', async (req, res) => {
         })
     )
 
-    await currentArray.map(item => {
+    currentArray.map(item => {
         Object.assign(item, item.props)
         delete item.props;
-
         return item
     })
 
-    let finalResult = { "result" : await currentArray}
-    await res.json(finalResult).end()
+    let finalResult = { "result" : currentArray}
+    res.json(finalResult).end()
 })
 
 // Catch all handler for all other request.
