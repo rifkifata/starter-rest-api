@@ -75,14 +75,22 @@ app.get('/:col', async (req, res) => {
   //console.log(abc)
   let result = items.results.map(a => a.key)
   console.log(result)
-
+    let currentArray = []
   //nembak by key
     Promise.all(
         result.map(async (item) => {
-            const response = await db.collection('cekgung').get(item)
-            console.log("tes"+JSON.stringify(response, null, 2))
+            const response = await db.collection(col).get(item)
+            await array.push(response);
         })
     )
+
+    currentArray.map(item => {
+        Object.assign(item, item.props)
+        delete item.props;
+        return item
+    })
+
+    console.log("iniarray" + currentArray);
 })
 
 // Catch all handler for all other request.
