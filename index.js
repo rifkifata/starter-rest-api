@@ -67,7 +67,7 @@ app.get('/:col', async (req, res) => {
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
   console.log(JSON.stringify(items, null, 2))
-  //res.json(items).end() //aktifin lagi
+  res.json(items).end()
 
   // let arrayOfObject = items.results.map((item) => ({
   //   key: item.key
@@ -80,12 +80,9 @@ app.get('/:col', async (req, res) => {
     Promise.all(
         result.map(async (item) => {
             const response = await db.collection('cekgung').get(item)
-            console.log(JSON.stringify(item, null, 2))
-            return await res.json(response).end()
+            console.log("tes"+JSON.stringify(response, null, 2))
         })
-    );
-
-    
+    )
 })
 
 // Catch all handler for all other request.
