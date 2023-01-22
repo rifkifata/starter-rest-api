@@ -92,8 +92,8 @@ app.get('/getall/:col', async (req, res) => {
 
 // Update entire bike
 app.put("/:col/:key", async (req, res) => {
-    const key = req.params.key;
-
+    const key = req.params.key
+    const col = req.params.kol
     // Make sure bike data exists
     if (!req.body) {
         throw new Error();
