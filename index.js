@@ -83,7 +83,7 @@ app.get('/:col/getAll', async (req, res) => {
         })
     )
 
-    currentArray.map(item => {
+    await currentArray.map(item => {
         Object.assign(item, item.props)
         delete item.props;
 
