@@ -43,7 +43,7 @@ app.delete('/:col/:key', async (req, res) => {
 })
 
 // Get a single item
-app.get('/:col/:key', async (req, res) => {
+app.get('/getbykey/:col/:key', async (req, res) => {
   const col = req.params.col
   const key = req.params.key
   console.log(`from collection: ${col} get key: ${key} with params ${JSON.stringify(req.params)}`)
