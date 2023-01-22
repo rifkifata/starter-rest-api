@@ -80,7 +80,7 @@ app.get('/:col', async (req, res) => {
     Promise.all(
         result.map(async (item) => {
             const response = await db.collection(col).get(item)
-            await array.push(response);
+            await currentArray.push(response);
         })
     )
 
