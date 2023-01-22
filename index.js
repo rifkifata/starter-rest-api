@@ -67,7 +67,8 @@ app.get('/:col', async (req, res) => {
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
   console.log(JSON.stringify(items, null, 2))
-  res.json(items).end()
+  //res.json(items).end() //aktifin lagi
+
   // let arrayOfObject = items.results.map((item) => ({
   //   key: item.key
   // }))
@@ -76,13 +77,13 @@ app.get('/:col', async (req, res) => {
   console.log(result)
 
   //nembak by key
-    const borderCountr = await Promise.all(
+    Promise.all(
         result.map(async (item) => {
             const response = await db.collection('cekgung').get(item)
-            return await response.json();
+            console.log(JSON.stringify(item, null, 2))
+            return await res.json(response).end()
         })
     );
-    console.log(borderCountr);
 
     
 })
