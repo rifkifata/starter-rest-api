@@ -87,6 +87,7 @@ app.get('/getall/:col', async (req, res) => {
     })
 
     let finalResult = { "result": currentArray }
+    console.log("ini" + currentArray)
     if (currentArray == []) {
         res.json("koccong").end()
     }
