@@ -77,12 +77,15 @@ app.get('/:col', async (req, res) => {
   //console.log(result)
     let currentArray = []
   //nembak by key
-    const getbyone = Promise.all(
+    Promise.all(
         result.map(async (item) => {
             const response = await db.collection(col).get(item)
-            console.log(response);
+            await console.log(response)
+            await currentArray.push(response)
         })
     )
+
+    console.log("ini array" + currentArray)
 
     /*currentArray.map(item => {
         Object.assign(item, item.props)
