@@ -75,16 +75,15 @@ app.get('/:col', async (req, res) => {
   //console.log(abc)
   let result = items.results.map(a => a.key)
   //console.log(result)
-    let currentArray = []
   //nembak by key
-    Promise.all(
+    await Promise.all(
         result.map(async (item) => {
             currentArray.push(await db.collection(col).get(item))
         })
     )
     
     console.log("ini array" + currentArray)
-    res.json(currentArray).end()
+    await res.json(currentArray).end()
     
 })
 
