@@ -94,25 +94,15 @@ app.get('/getall/:col', async (req, res) => {
 app.put("/:col/:key", async (req, res) => {
     const key = req.params.key
     const col = req.params.col
-    // Make sure bike data exists
-    if (!req.body) {
-        throw new Error();
-    }
 
-    // Make sure bike has ID and handle
-    if (!key) {
-        throw new Error();
-    }
-
-    // Delete existing bike object
-    await db.collection(col).delete(key)
-
-    // Save new bike object
-    const item = await db.collection(col).set(key, req.body)
-    console.log(JSON.stringify(item, null, 2))
-    res.json(item).end()
-
-    res.send(bikeObject)
+    // Delete existing object
+    const delRes = await db.collection(col).delete(key)
+    if (delRes == true) {
+        // Save new Object
+        const item = await db.collection(col).set(key, req.body)
+        console.log(JSON.stringify(item, null, 2))
+        res.json(item).end()
+    } else {console.log("delete error")}
 });
 
 // Catch all handler for all other request.
