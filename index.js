@@ -84,11 +84,11 @@ app.get('/:col', async (req, res) => {
         })
     )
 
-    currentArray.map(item => {
+    /*currentArray.map(item => {
         Object.assign(item, item.props)
         delete item.props;
         return item
-    })
+    })*/
 
     console.log("iniarray" + currentArray);
 })
