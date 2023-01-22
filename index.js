@@ -77,7 +77,7 @@ app.get('/:col', async (req, res) => {
   console.log(result)
     let currentArray = []
   //nembak by key
-    Promise.all(
+    const getbyone = Promise.all(
         result.map(async (item) => {
             const response = await db.collection(col).get(item)
             currentArray.push(response);
@@ -90,7 +90,8 @@ app.get('/:col', async (req, res) => {
         return item
     })*/
 
-    console.log("iniarray" + currentArray);
+    console.log("ini" + getbyone)
+    
 })
 
 // Catch all handler for all other request.
