@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 const db = require('@cyclic.sh/dynamodb')
-const ObjectID = require('mongodb').ObjectID
+
+const { ObjectID } = require('mongodb');
+//const ObjectID = require('mongodb').ObjectID
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
