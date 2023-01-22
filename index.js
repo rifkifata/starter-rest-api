@@ -86,13 +86,34 @@ app.get('/getall/:col', async (req, res) => {
         return item
     })
 
-    let finalResult = { "result": currentArray }
-    console.log("ini" + currentArray)
-    if (currentArray == [] || currentArray == undefined || currentArray == null) {
-        res.json("koccong").end()
-    }
-    else res.json(finalResult).end()
+    let finalResult = { "results": currentArray }
+    res.json(finalResult).end()
 })
+
+// Update entire bike
+app.put("/:col/:key", async (req, res) => {
+    const key = req.params.key;
+
+    // Make sure bike data exists
+    if (!req.body) {
+        throw new Error();
+    }
+
+    // Make sure bike has ID and handle
+    if (!key) {
+        throw new Error();
+    }
+
+    // Delete existing bike object
+    await db.collection(col).delete(key)
+
+    // Save new bike object
+    const item = await db.collection(col).set(key, req.body)
+    console.log(JSON.stringify(item, null, 2))
+    res.json(item).end()
+
+    res.send(bikeObject)
+});
 
 // Catch all handler for all other request.
 app.use('*', (req, res) => {
