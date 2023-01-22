@@ -61,6 +61,7 @@ app.get('/:col/:key', async (req, res) => {
 //   res.json(items).end()
 // })
 
+//get All
 app.get('/:col', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
@@ -75,15 +76,11 @@ app.get('/:col', async (req, res) => {
   console.log(result)
 
   //nembak by key
-  let penampung = []
-  for (let i = 0;i<result.length;i++){
-    const key = result[i]
-    const item = await db.collection(col).get(key)
-    penampung.push(item)
-    console.log ("ini penampung ke - "+i+item)
-  }
-  console.log("hasil akhir : " + penampung)
+ /*   let abc = results.map((item) => ({
 
+    }))
+*/
+    
 })
 
 // Catch all handler for all other request.
