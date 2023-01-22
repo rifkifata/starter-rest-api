@@ -76,10 +76,14 @@ app.get('/:col', async (req, res) => {
   console.log(result)
 
   //nembak by key
- /*   let abc = results.map((item) => ({
+    const borderCountr = await Promise.all(
+        result.map(async (item) => {
+            const response = await db.collection('cekgung').get(item)
+            return await response.json();
+        })
+    );
+    console.log(borderCountr);
 
-    }))
-*/
     
 })
 
