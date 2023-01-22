@@ -62,33 +62,30 @@ app.get('/:col/:key', async (req, res) => {
  })*/
 
 //get All
-app.get('/getall/:col', async (req, res) => {
-    try {
-        const col = req.params.col
-        console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
-        const items = await db.collection(col).list()
-
-        let result = items.results.map(a => a.key)
-        let currentArray = []
-
-        await Promise.all(
-            result.map(async (item) => {
-                currentArray.push(await db.collection(col).get(item))
-            })
-        )
-
-        await currentArray.map(item => {
-            Object.assign(item, item.props)
-            delete item.props;
-
-            return item
+app.get('/:col', async (req, res) => {
+  const col = req.params.col
+  console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
+  const items = await db.collection(col).list()
+  
+  let result = items.results.map(a => a.key)
+  let currentArray = []
+  
+    await Promise.all(
+        result.map(async (item) => {
+            currentArray.push(await db.collection(col).get(item))
         })
+    )
 
-        let result = { "result": currentArray }
-        await res.json(result).end()
-    } catch (err) {
-        console.log(err);
-    }
+    await currentArray.map(item => {
+        Object.assign(item, item.props)
+        delete item.props;
+
+        return item
+    })
+
+    let result = { "result" : currentArray}
+    await res.json(result).end()
+
 })
 
 // Catch all handler for all other request.
