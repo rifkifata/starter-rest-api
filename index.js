@@ -67,7 +67,7 @@ app.get('/:col', async (req, res) => {
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
   //console.log(JSON.stringify(items, null, 2))
-  res.json(items).end()
+  
 
   // let arrayOfObject = items.results.map((item) => ({
   //   key: item.key
@@ -79,20 +79,12 @@ app.get('/:col', async (req, res) => {
   //nembak by key
     Promise.all(
         result.map(async (item) => {
-            const response = await db.collection(col).get(item)
-            await console.log(response)
-            await currentArray.push(response)
+            currentArray.push(await db.collection(col).get(item))
         })
     )
-
+    
     console.log("ini array" + currentArray)
-
-    /*currentArray.map(item => {
-        Object.assign(item, item.props)
-        delete item.props;
-        return item
-    })*/
-
+    res.json(currentArray).end()
     
 })
 
