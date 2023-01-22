@@ -83,8 +83,8 @@ app.get('/:col', async (req, res) => {
         return item
     })
 
-    let result = { "result" : await currentArray}
-    await res.json(result).end()
+    let finalResult = { "result" : await currentArray}
+    await res.json(finalResult).end()
 })
 
 // Catch all handler for all other request.
