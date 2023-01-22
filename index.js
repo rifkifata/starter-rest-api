@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }))
 // #############################################################################
 
 // Create or Update an item
-app.post('/:col/:key', async (req, res) => {
+app.post('/:col', async (req, res) => {
   console.log(req.body)
 
     const objectId = new ObjectID();
