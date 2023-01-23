@@ -61,7 +61,7 @@ app.get('/getbykey/:col/:key', async (req, res) => {
   let item = await db.collection(col).get(key)
     let props = item.props
     let newitem = {
-        ...item.collection, ...item.key, ...props
+        ...props
     }
   console.log(JSON.stringify(newitem, null, 2))
   res.json(newitem).end()
