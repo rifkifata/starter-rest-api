@@ -59,8 +59,12 @@ app.get('/getbykey/:col/:key', async (req, res) => {
   const key = req.params.key
   console.log(`from collection: ${col} get key: ${key} with params ${JSON.stringify(req.params)}`)
   let item = await db.collection(col).get(key)
-  console.log(JSON.stringify(item, null, 2))
-  res.json(item).end()
+    let props = item.props
+    let newitem = {
+        ...item.collection, ...item.key, ...props
+    }
+  console.log(JSON.stringify(newitem, null, 2))
+  res.json(newitem).end()
 })
 
 //Get all full listing
@@ -103,6 +107,10 @@ app.put("/:col/:key", async (req, res) => {
 
     // Delete existing object
     await db.collection(col).delete(key)
+
+    if (!req.body.updatedAt) {
+        
+    }
     
     // Save new Object
     const item = await db.collection(col).set(key, req.body)
