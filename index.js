@@ -96,13 +96,12 @@ app.put("/:col/:key", async (req, res) => {
     const col = req.params.col
 
     // Delete existing object
-    const delRes = await db.collection(col).delete(key)
-    if (delRes == true) {
-        // Save new Object
-        const item = await db.collection(col).set(key, req.body)
-        console.log(JSON.stringify(item, null, 2))
-        res.json(item).end()
-    } else {console.log("delete error")}
+    await db.collection(col).delete(key)
+    
+    // Save new Object
+    const item = await db.collection(col).set(key, req.body)
+    console.log(JSON.stringify(item, null, 2))
+    res.json(item).end()
 });
 
 // Catch all handler for all other request.
