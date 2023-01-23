@@ -25,6 +25,12 @@ app.use(express.urlencoded({ extended: true }))
 // Create or Update an item
 app.post('/:col', async (req, res) => {
   console.log(req.body)
+    const now = new Date();
+    let date = {
+        "createdAt": now.toISOString(),
+        "updatedAt": now.toISOString()
+    }
+    const isi = {...req.body, ...date}
 
   const objectId = new ObjectID();
   const col = req.params.col
@@ -32,7 +38,7 @@ app.post('/:col', async (req, res) => {
   let key = objectId.toString()
 
   console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
-  const item = await db.collection(col).set(key, req.body)
+  const item = await db.collection(col).set(key, isi)
   console.log(JSON.stringify(item, null, 2))
   res.json(item).end()
 })
