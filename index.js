@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const db = require('@cyclic.sh/dynamodb')
-
+const { momen } = require('mongodb');
 const { ObjectID } = require('mongodb');
 //const ObjectID = require('mongodb').ObjectID
 
@@ -109,15 +109,27 @@ app.put("/:col/:key", async (req, res) => {
     const key = req.params.key
     const col = req.params.col
 
+    // get createdAt and updatedAt
+    let oldDate = await db.collection(col).get(key)
+    let createdAtOld = oldDate.props.createdAt
+    let updatedAtOld = oldDate.props.updatedAt
+
+    if (req.body.updatedAt) {
+      const mydate = req.body.updatedAt
+      updatedAtOld = new Date(mydate).toISOString()
+    }
+
     // Delete existing object
     await db.collection(col).delete(key)
-
-    if (!req.body.updatedAt) {
-        
-    }
     
+    //isi
+    const isi = {
+      ...req.body,
+      "updatedAt" : updatedAtOld,
+      "createdAt" : createdAtOld
+    }
     // Save new Object
-    const item = await db.collection(col).set(key, req.body)
+    const item = await db.collection(col).set(key, isi)
     console.log(JSON.stringify(item, null, 2))
     res.json(item).end()
 });
