@@ -108,6 +108,7 @@ app.get('/getall/:col', async (req, res) => {
 app.put("/:col/:key", async (req, res) => {
     const key = req.params.key
     const col = req.params.col
+    const now = new Date()
 
     // get createdAt and updatedAt
     let oldDate = await db.collection(col).get(key)
