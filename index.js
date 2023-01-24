@@ -117,6 +117,8 @@ app.put("/:col/:key", async (req, res) => {
     if (req.body.updatedAt) {
       const mydate = req.body.updatedAt
       updatedAtOld = new Date(mydate).toISOString()
+    } else {
+      updatedAtOld = now.toISOString()
     }
 
     // Delete existing object
