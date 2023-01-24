@@ -76,11 +76,11 @@ app.get('/:col', async (req, res) => {
 
   //nembak by key
   let penampung = []
-  for (let i = 0;i<=result.length;i++){
+  for (let i = 0;i<3;i++){
     const key = result[i]
     const item = await db.collection(col).get(key)
     penampung.push(item)
-    console.log ("ini penampung ke - "+i+item)
+    console.log(JSON.stringify(items, null, 2))
   }
   console.log("hasil akhir : " + penampung)
 
