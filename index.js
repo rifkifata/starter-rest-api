@@ -76,7 +76,7 @@ app.get('/:col', async (req, res) => {
 
   //nembak by key
   let penampung = []
-  for (let i = 0;i<result.length;i++){
+  for (let i = 0;i<=result.length;i++){
     const key = result[i]
     const item = await db.collection(col).get(key)
     penampung.push(item)
