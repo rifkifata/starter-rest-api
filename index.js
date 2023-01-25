@@ -103,6 +103,7 @@ app.get('/getall/:col', async (req, res) => {
     currentArray.map(item => {
         Object.assign(item, item.props)
         delete item.props;
+        item.updatedAt.toLocaleDateString()
         return item
     })
 
