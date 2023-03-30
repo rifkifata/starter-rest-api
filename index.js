@@ -199,7 +199,7 @@ app.get('/anyapi', async(req, res, next) => {
       
       console.log (msg);
       //message to whatsapp
-      //request({url : 'https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=' +msg+'&apikey=5017646', method: "GET"})
+      request({url : 'https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=' +msg+'&apikey=5017646', method: "GET"})
     })
 
 });
