@@ -191,7 +191,8 @@ app.get('/anyapi', async(req, res, next) => {
       res.json(sorting);
       
       //call top object of array
-      const top = sorting[0];
+      const top = sorting.slice(0,1);
+      console.log(top);
       const maskapai = top.map(({ maskapai }) => maskapai)
       const harga = top.map(({ harga }) => harga)
       const msg = 'halo ikyganteng, ada maskapai ' + maskapai + ' seharga ' + harga + " ,nih brader" 
