@@ -186,14 +186,16 @@ app.get('/anyapi', async(req, res, next) => {
       // body.data = body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail}));
       // body.data = body.data.map
       let arr = body.data.data.searchList.departureFlights.map(({marketingAirline, fareDetail}) => ({maskapai : marketingAirline.displayName, harga : fareDetail.cheapestFare}));  
-      console.log(body.data.data.searchList.departureFlights.map(({marketingAirline, fareDetail}) => ({maskapai : marketingAirline.displayName, harga : fareDetail.cheapestFare})));
       //const sorting = arr.sort((a, b) => parseFloat(a.harga) - parseFloat(b.harga))
       const sorting = arr.sort(function(a, b) {return a.harga - b.harga});
-      res.json(arr.sort((a, b) => parseFloat(a.harga) - parseFloat(b.harga)));
-
+      res.json(sorting);
       
       //call top object of array
-      const msg = sorting[0]['maskapai','harga'];
+      const top = sorting[0];
+      const maskapai = objArray.map(({ maskapai }) => maskapai)
+      const harga = objArray.map(({ harga }) => harga)
+      const msg = 'halo ikyganteng, ada maskapai ' + maskapai + ' seharga ' + harga + " ,nih brader" 
+      
       console.log (msg);
       //message to whatsapp
       //request({url : 'https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=' +msg+'&apikey=5017646', method: "GET"})
