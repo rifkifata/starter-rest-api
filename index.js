@@ -144,13 +144,14 @@ app.put("/:col/:key", async (req, res) => {
     res.json(item).end()
 });
 
-app.post('/anyapi', async(req, res, next) => {
+app.get('/anyapi', async(req, res, next) => {
   request({
-    uri: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
+    url: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
     // qs: {
     //   api_key: '123456',
     //   query: 'World of Warcraft: Legion'
     // }
+    method: "POST",
     json: {
       "requestItems": [
           "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jEyKEf0T6jhTqogS5QSHqaYrI93wNWcFgvlTINGpM46o",
