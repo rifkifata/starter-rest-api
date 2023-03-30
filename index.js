@@ -145,7 +145,7 @@ app.put("/:col/:key", async (req, res) => {
 });
 
 app.get('/anyapi', async(req, res, next) => {
-  const abc = request({
+  const item = request({
     url: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
     // qs: {
     //   api_key: '123456',
@@ -171,10 +171,9 @@ app.get('/anyapi', async(req, res, next) => {
           "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5FDf8hYPtF_Ak1NfOpio_Ncn4-TuhK132lkEIETeIszPc",
           "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5F3tBy-IOVg95Tpcr9ahVaSQNMZ8tkYAWZX6vrE_B5-js"
       ]
-  }
-
-  }).pipe(res);
-  console.log(JSON.stringify(res, null, 4));
+    }
+  })
+  res.json(item).end()
 });
 
 // Catch all handler for all other request.
