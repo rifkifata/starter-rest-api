@@ -208,16 +208,17 @@ app.get('/anyapi', async(req, res, next) => {
         
       // body.data = body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail}));
       // body.data = body.data.map
-      let arr = body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail}));  
-      console.log(body.data.data.searchList.departureFlights.map(({fareDetail}) => ({test : fareDetail.cheapestFare})));
-        
+      let arr = body.data.data.searchList.departureFlights.map(({marketingAirline, fareDetail}) => ({maskapai : marketingAirline.displayName, harga : fareDetail.cheapestFare}));  
+      console.log(body.data.data.searchList.departureFlights.map(({marketingAirline, fareDetail}) => ({maskapai : marketingAirline.displayName, harga : fareDetail.cheapestFare})));
+       
+      res.json(arr.sort((a, b) => parseFloat(b.harga) - parseFloat(a.harga)));
       // arr = arr.map((fareDetail) => {
       //   return ({
       //     fareDetail.cheapestFare,
       //     pizzaSlicesContent: pizzaSlicesContent
       //   })
       // })
-        res.json(body.data).end();
+        //res.json(body.data).end();
     });
 
 });
