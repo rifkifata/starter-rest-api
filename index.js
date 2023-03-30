@@ -208,7 +208,7 @@ app.get('/anyapi', async(req, res, next) => {
         
       // body.data = body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail}));
       // body.data = body.data.map   
-      console.log(body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail})).fareDetail.cheapestFare);
+      console.log(body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail})));
         
         res.json(body.data).end();
     });
