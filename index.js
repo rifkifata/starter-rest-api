@@ -3,6 +3,7 @@ const app = express()
 const db = require('@cyclic.sh/dynamodb')
 const { momen } = require('mongodb');
 const { ObjectID } = require('mongodb');
+const request = require('request');
 //const ObjectID = require('mongodb').ObjectID
 
 app.use(express.json())
@@ -141,6 +142,16 @@ app.put("/:col/:key", async (req, res) => {
     const item = await db.collection(col).set(key, isi)
     console.log(JSON.stringify(item, null, 2))
     res.json(item).end()
+});
+
+app.get('/anyapi', async(req, res, next) =>{
+  request({
+    uri: 'https://tan-colorful-snail.cyclic.app/getall/cekgung1/',
+    // qs: {
+    //   api_key: '123456',
+    //   query: 'World of Warcraft: Legion'
+    // }
+  }).pipe(res);
 });
 
 // Catch all handler for all other request.
