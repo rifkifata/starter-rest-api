@@ -173,7 +173,8 @@ app.get('/anyapi', async(req, res, next) => {
       ]
   }
 
-  }).pipe(res.code);
+  }).pipe(res);
+  console.log(JSON.stringify(res, null, 4));
 });
 
 // Catch all handler for all other request.
