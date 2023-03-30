@@ -205,8 +205,9 @@ app.get('/anyapi', async(req, res, next) => {
         body.emit('update');
     });
     body.on('update', function () {
+        body.data = body.data.code;
         console.log(body.data);
-        res.json(body.data).end() // HOORAY! THIS WORKS!
+        res.json(body.data).end();
     });
 
 });
