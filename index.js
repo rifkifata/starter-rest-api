@@ -207,9 +207,16 @@ app.get('/anyapi', async(req, res, next) => {
     body.on('update', function () {
         
       // body.data = body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail}));
-      // body.data = body.data.map   
-      console.log(body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail})));
+      // body.data = body.data.map
+      let arr = body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail}));  
+      console.log(body.data.data.searchList.departureFlights.map(({fareDetail}) => ({test : fareDetail.cheapestFare})));
         
+      // arr = arr.map((fareDetail) => {
+      //   return ({
+      //     fareDetail.cheapestFare,
+      //     pizzaSlicesContent: pizzaSlicesContent
+      //   })
+      // })
         res.json(body.data).end();
     });
 
