@@ -173,8 +173,7 @@ app.get('/anyapi', async(req, res, next) => {
       ]
   }
 
-  }).pipe(res);
-  console.log("inires" + abc);
+  }).pipe(res.code);
 });
 
 // Catch all handler for all other request.
