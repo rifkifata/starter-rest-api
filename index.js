@@ -205,7 +205,7 @@ app.get('/anyapi', async(req, res, next) => {
         body.emit('update');
     });
     body.on('update', function () {
-        console.log(body.data);
+        console.log(body.data.data.searchList.departureFlights.map(({fareDetail}) => ({fareDetail})));
         res.json(body.data).end();
     });
 
