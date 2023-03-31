@@ -181,7 +181,7 @@ app.get('/anyapi', async function (req, res, next) {
                 "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5F3tBy-IOVg95Tpcr9ahVaSQNMZ8tkYAWZX6vrE_B5-js"
             ]
         }})
-        .then(function (htmlString) {
+        .then( function (htmlString) {
             //console.log(htmlString.data)
             //console.log(htmlString)
             let arr = htmlString.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
@@ -195,7 +195,25 @@ app.get('/anyapi', async function (req, res, next) {
             const harga = top.map(({ harga }) => harga)
             const tanggal = top.map(({ tanggal }) => tanggal)
             let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
-            console.log(msg);
+
+            rp({
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Host': 'api.callmebot.com'
+                },
+                //url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
+                url: "https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=ikyganteng&apikey=5017646",
+                method: "POST",
+                json: {
+                    "chatId": "6285277494909@c.us",
+                    "message": "ikyagnteg"
+                }
+            }, function (error, response, data) {
+                console.error('error:', error); // Print the error if one occurred
+                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                console.log('data:', data); // Print the HTML for the Google homepage.
+            });
+
         })
         .catch(function (err) {
             // Crawling failed...
