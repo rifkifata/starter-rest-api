@@ -179,8 +179,7 @@ app.get('/anyapi', async function (req, res, next) {
                 ]
             })
             .then(response => {
-                console.log(response);
-                let arr = response.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
+                let arr = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
                 const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
                 res.json(sorting);
                 const top = sorting.slice(0, 1);
