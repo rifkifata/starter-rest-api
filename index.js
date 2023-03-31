@@ -206,7 +206,7 @@ async function getData() {
         body.data = data;
         body.emit('update');
     });
-    body.on('update', function () {
+    body.on('update', async function () {
         let arr = body.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
         const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
         res.json(sorting);
