@@ -200,7 +200,7 @@ app.get('/anyapi', function (req, res, next) {
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
         
     })
-    await sendMessage("asd");
+    sendMessage("asd");
     async function sendMessage(msg) {
         console.log(msg);
             axios({
@@ -208,7 +208,7 @@ app.get('/anyapi', function (req, res, next) {
                 url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
                 data: {
                      "chatId": "6285277494909@c.us",
-                     "message": "mkmk"
+                     "message": msg
                    },
                 headers: {
                  'Content-Type': 'application/json'
