@@ -3,7 +3,7 @@ const app = express()
 const db = require('@cyclic.sh/dynamodb')
 const { momen } = require('mongodb');
 const { ObjectID } = require('mongodb');
-const request = require('request');
+const request = require('request-promise');
 var EventEmitter = require("events").EventEmitter;
 // var admin = require("firebase-admin");
 // var serviceAccount = require("privateKey.json");
@@ -155,8 +155,8 @@ app.put("/:col/:key", async (req, res) => {
 
 app.get('/anyapi', async(req, res, next) => {
     var body = new EventEmitter();
-    let msg;
-    request({
+    let msg; 
+    await request({
       url : "https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming",
       method: "POST",
       json: {
@@ -195,20 +195,20 @@ app.get('/anyapi', async(req, res, next) => {
       const tanggal = top.map(({ tanggal }) => tanggal)
       msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *'+ tanggal + '* , nih kyyy'
     })
-    request({
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
-      method: "POST",
-      json: {
-        "chatId": "6285277494909@c.us",
-        "message": msg}
-      }, function(error, response, data) {
-        console.error('error:', error); // Print the error if one occurred
-        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        console.log('data:', data); // Print the HTML for the Google homepage.
-    });
+    // await request({
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
+    //   method: "POST",
+    //   json: {
+    //     "chatId": "6285277494909@c.us",
+    //     "message": msg}
+    //   }, function(error, response, data) {
+    //     console.error('error:', error); // Print the error if one occurred
+    //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    //     console.log('data:', data); // Print the HTML for the Google homepage.
+    // });
 });
 
 // Catch all handler for all other request.
