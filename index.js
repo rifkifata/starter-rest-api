@@ -227,7 +227,7 @@ app.get('/anyapi', async function (req, res, next) {
         };
 
         await axios.request(options).then(function (response) {
-            console.log("success kirim pesan");
+            console.log(response);
         }).catch(function (error) {
             console.error(error);
         });
