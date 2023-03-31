@@ -202,10 +202,10 @@ app.get('/anyapi', async(req, res, next) => {
       //message to whatsapp
 
       var errorhandling = request({
-        url : process.env.URL,
+        url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
         method: "POST",
         json: {
-          "chatId": process.env.CHAT_ID,
+          "chatId": "6285277494909@c.us",
           "message": msg
       }}, function(error, response, data) {
           console.log(error); 
