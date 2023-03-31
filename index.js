@@ -197,7 +197,7 @@ app.get('/anyapi', async function (req, res, next) {
             };
 
             let abc  = await axios(options);
-            console.log(abc);
+            
             let arr = abc.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
             const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
             res.json(sorting);
