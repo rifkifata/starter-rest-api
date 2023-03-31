@@ -200,21 +200,22 @@ app.get('/anyapi', function (req, res, next) {
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
         
     })
-    sendMessage("asd");
-    async function sendMessage(msg) {
-        console.log(msg);
-            axios({
-                method: 'post', //you can set what request you want to be
-                url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
-                data: {
-                     "chatId": "6285277494909@c.us",
-                     "message": msg
-                   },
-                headers: {
-                 'Content-Type': 'application/json'
-               }
-            })
-    }
+
+    request({
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
+        method: "POST",
+        json: {
+            "chatId": "6285277494909@c.us",
+            "message": "ikyagnteg"
+        }
+    }, function (error, response, data) {
+        console.error('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        console.log('data:', data); // Print the HTML for the Google homepage.
+    });
 
     // await request({
     //   headers: {
