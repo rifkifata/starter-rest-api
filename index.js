@@ -5,6 +5,7 @@ const { momen } = require('mongodb');
 const { ObjectID } = require('mongodb');
 const request = require('request-promise');
 var EventEmitter = require("events").EventEmitter;
+const axios = require('axios');
 // var admin = require("firebase-admin");
 // var serviceAccount = require("privateKey.json");
 // const certPath = admin.credential.cert(serviceAccount);
@@ -201,21 +202,18 @@ app.get('/anyapi', function (req, res, next) {
     })
 
     async function sendMessage(msg) {
-        await request({
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
-            method: "POST",
-            json: {
-                "chatId": "6285277494909@c.us",
-                "message": msg
-            }
-        }, function (error, response, data) {
-            console.error('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('data:', data); // Print the HTML for the Google homepage.
-        });
+        console.log(msg);
+            axios({
+                method: 'post', //you can set what request you want to be
+                url: 'https://example.com/request',
+                data: {
+                     "chatId": "6285277494909@c.us",
+                     "message": msg
+                   },
+                headers: {
+                 'Content-Type': 'application/json'
+               }
+            })
     }
 
     // await request({
