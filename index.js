@@ -197,12 +197,25 @@ app.get('/anyapi', function (req, res, next) {
         const harga = top.map(({ harga }) => harga)
         const tanggal = top.map(({ tanggal }) => tanggal)
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
-        console.log(msg);
         await sendMessage(msg);
     })
 
-    function sendMessage(msg) {
-        console.log(msg);
+    async function sendMessage(msg) {
+        await request({
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
+            method: "POST",
+            json: {
+                "chatId": "6285277494909@c.us",
+                "message": msg
+            }
+        }, function (error, response, data) {
+            console.error('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            console.log('data:', data); // Print the HTML for the Google homepage.
+        });
     }
 
     // await request({
