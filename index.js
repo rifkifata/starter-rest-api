@@ -163,6 +163,7 @@ app.get('/anyapi', async function (req, res, next) {
             msg
         } = await getTicket();
         sendWa(msg, res);
+        console.log(msg);
     }
 
     async function getTicket() {
