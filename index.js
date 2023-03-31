@@ -193,7 +193,7 @@ app.get('/anyapi', function (req, res, next) {
 
         //call top object of array
         const top = sorting.slice(0, 1);
-        console.log(top);
+        //console.log(top);
         const maskapai = top.map(({ maskapai }) => maskapai)
         const harga = top.map(({ harga }) => harga)
         const tanggal = top.map(({ tanggal }) => tanggal)
@@ -208,7 +208,7 @@ app.get('/anyapi', function (req, res, next) {
                 url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
                 data: {
                      "chatId": "6285277494909@c.us",
-                     "message": msg
+                     "message": "mkmk"
                    },
                 headers: {
                  'Content-Type': 'application/json'
