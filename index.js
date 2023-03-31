@@ -203,7 +203,8 @@ app.get('/anyapi', async function (req, res, next) {
 
     await request({
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Host' : 'api.callmebot.com'
         },
         //url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
         url: "https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=asdada&apikey=5017646",
