@@ -154,8 +154,8 @@ app.put("/:col/:key", async (req, res) => {
 });
 
 
-app.get('/anyapi', async function (req, res, next) {
-    const getDataTiket = await getData();
+app.get('/anyapi', function (req, res, next) {
+    const getDataTiket = getData();
     //console.log(getDataTiket);
     //const sendWa = await sendMessage(getDataTiket);
     // res.end must finish in 3 seconds from the initial post on the first line
@@ -177,9 +177,9 @@ app.get('/anyapi', async function (req, res, next) {
     // });
 });
 
-async function getData() {
+function getData() {
     var body = new EventEmitter();
-    await request({
+    request({
         url: "https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming",
         method: "POST",
         json: {
@@ -207,7 +207,7 @@ async function getData() {
         body.emit('update');
     });
 
-    body.on('update', async function () {
+    body.on('update', function () {
         let msg;
         let arr = body.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
         const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
@@ -221,7 +221,7 @@ async function getData() {
         const tanggal = top.map(({ tanggal }) => tanggal)
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
         console.log(msg);
-        await sendMessage(msg);
+        //await sendMessage(msg);
     })
 }
 
