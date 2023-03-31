@@ -202,6 +202,9 @@ app.get('/anyapi', async(req, res, next) => {
       //message to whatsapp
 
       request({
+        headers: {
+          'Content-Type': 'application/json'
+        },
         url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
         method: "POST",
         json: {
@@ -211,6 +214,7 @@ app.get('/anyapi', async(req, res, next) => {
           console.error('error:', error); // Print the error if one occurred
           console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
           console.log('body:', body); // Print the HTML for the Google homepage.
+          console.log('data:', data); // Print the HTML for the Google homepage.
       });
     })
 });
