@@ -197,10 +197,10 @@ app.get('/anyapi', async function (req, res, next) {
                 }
             };
 
-            await axios(options)
+            let res = await axios(options)
             let arr = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
             const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
-            res.json(sorting);
+            //res.json(sorting);
 
             //call top object of array
             const top = sorting.slice(0, 1);
@@ -210,7 +210,7 @@ app.get('/anyapi', async function (req, res, next) {
             const tanggal = top.map(({ tanggal }) => tanggal)
             let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
             // Don't forget to return something   
-            return msg;
+            return {msg : msg};
         } catch (err) {
             console.error(err);
         }
