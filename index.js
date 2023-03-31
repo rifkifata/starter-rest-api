@@ -207,7 +207,7 @@ app.get('/anyapi', async(req, res, next) => {
           "chatId": process.env.CHAT_ID,
           "message": msg
       }}, function(error, response, data) {
-          console.log(response);
+          console.log(error);
       });
     })
 
