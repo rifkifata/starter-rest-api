@@ -205,7 +205,7 @@ app.get('/anyapi', function (req, res, next) {
         console.log(msg);
             axios({
                 method: 'post', //you can set what request you want to be
-                url: 'https://example.com/request',
+                url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
                 data: {
                      "chatId": "6285277494909@c.us",
                      "message": msg
