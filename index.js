@@ -163,12 +163,10 @@ app.get('/anyapi', async function (req, res, next) {
     getLocation(res);
 
     async function getLocation(res) {
-        /*let {
+        let {
             msg
         } = await first();
-        second(msg, res);*/
-        const a = first();
-        console.log(a);
+        second(msg, res);
     }
 
     ///
@@ -177,7 +175,7 @@ app.get('/anyapi', async function (req, res, next) {
             const options = {
                 method: 'POST',
                 url: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
-                headers: {
+                data: {
                     "requestItems": [
                         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jEyKEf0T6jhTqogS5QSHqaYrI93wNWcFgvlTINGpM46o",
                         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jLJA7G0QaH2lAceGwyf3U1_4b0L8ASmzc_7PDvdyRUJU",
@@ -201,7 +199,7 @@ app.get('/anyapi', async function (req, res, next) {
 
             let res = await axios(options);
             console.log(res.response.data.data);
-/*
+
             let arr = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
             const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
             //res.json(sorting);
@@ -215,7 +213,7 @@ app.get('/anyapi', async function (req, res, next) {
             let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
             // Don't forget to return something   
             console.log(msg);
-            return {msg : msg};*/
+            return {msg : msg};
         } catch (err) {
             console.error(err);
         }
