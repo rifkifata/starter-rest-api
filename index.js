@@ -184,7 +184,7 @@ app.get('/anyapi', function (req, res, next) {
         body.emit('update');
     });
 
-    body.on('update', function () {
+    body.on('update', async function () {
         let msg;
         let arr = body.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
         const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
@@ -198,7 +198,7 @@ app.get('/anyapi', function (req, res, next) {
         const tanggal = top.map(({ tanggal }) => tanggal)
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
         console.log(msg);
-        //await sendMessage(msg);
+        await sendMessage(msg);
     })
     // await request({
     //   headers: {
