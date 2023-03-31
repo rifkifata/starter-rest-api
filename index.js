@@ -198,9 +198,9 @@ app.get('/anyapi', function (req, res, next) {
         const harga = top.map(({ harga }) => harga)
         const tanggal = top.map(({ tanggal }) => tanggal)
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
-        await sendMessage(msg);
+        
     })
-
+    await sendMessage("asd");
     async function sendMessage(msg) {
         console.log(msg);
             axios({
