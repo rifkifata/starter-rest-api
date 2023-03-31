@@ -156,7 +156,7 @@ app.put("/:col/:key", async (req, res) => {
 
 app.get('/anyapi', async function (req, res, next) {
     const getDataTiket = await getData();
-    //const sendWa = await sendMessage();
+    const sendWa = await sendMessage(getDataTiket);
     // res.end must finish in 3 seconds from the initial post on the first line
     res.end() 
 
@@ -178,7 +178,7 @@ app.get('/anyapi', async function (req, res, next) {
 
 async function getData() {
     var body = new EventEmitter();
-    let msg;
+    var msg;
     await request({
         url: "https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming",
         method: "POST",
@@ -206,7 +206,9 @@ async function getData() {
         body.data = data;
         body.emit('update');
     });
-    body.on('update', async function () {
+
+    body.on('update', function () {
+        
         let arr = body.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
         const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
         res.json(sorting);
@@ -217,28 +219,29 @@ async function getData() {
         const maskapai = top.map(({ maskapai }) => maskapai)
         const harga = top.map(({ harga }) => harga)
         const tanggal = top.map(({ tanggal }) => tanggal)
-        msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy'
-
-        await request({
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
-            method: "POST",
-            json: {
-                "chatId": "6285277494909@c.us",
-                "message": msg
-            }
-        }, function (error, response, data) {
-            console.error('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('data:', data); // Print the HTML for the Google homepage.
-        });
+        msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
+        
     })
+    return msg;
 }
 
-async function sendMessage() {
-     
+async function sendMessage(msg) {
+    await request({
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
+        method: "POST",
+        json: {
+            "chatId": "6285277494909@c.us",
+            "message": msg
+        }
+    }, function (error, response, data) {
+        console.error('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        console.log('data:', data); // Print the HTML for the Google homepage.
+    });
+
 }
 
 // Catch all handler for all other request.
