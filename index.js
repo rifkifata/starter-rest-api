@@ -156,7 +156,7 @@ app.put("/:col/:key", async (req, res) => {
 
 app.get('/anyapi', async function (req, res, next) {
     const getDataTiket = await getData();
-    const sendWa = await sendMessage();
+    //const sendWa = await sendMessage();
     // res.end must finish in 3 seconds from the initial post on the first line
     res.end() 
 
