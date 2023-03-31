@@ -170,7 +170,7 @@ app.get('/anyapi', async function (req, res, next) {
     }
 
     ///
-    function first() {
+    async function first() {
         try {
             const options = {
                 method: 'POST',
