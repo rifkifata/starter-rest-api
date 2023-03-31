@@ -195,11 +195,19 @@ app.get('/anyapi', async(req, res, next) => {
       console.log(top);
       const maskapai = top.map(({ maskapai }) => maskapai)
       const harga = top.map(({ harga }) => harga)
-      const msg = 'halo ikyganteng, ada maskapai ' + maskapai + ' seharga ' + harga + " ,nih brader" 
+      const msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *'+ tanggal + '* , nih kyyy'
       
-      console.log (msg);
+      //console.log (msg);
       //message to whatsapp
-      request({url : 'https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=' +msg+'&apikey=5017646', method: "GET"})
+      request({
+        url : process.env.URL,
+        method: "POST",
+        json: {
+          "chatId": process.env.CHAT_ID,
+          "message": msg
+      }}, function(error, response, data) {
+          console.log(response);
+      });
     })
 
 });
