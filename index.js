@@ -226,6 +226,7 @@ app.get('/anyapi', async function (req, res, next) {
                 'Host': 'api.callmebot.com'
             }
         };
+        console.log(option)
 
         await axios.request(options).then(function (response) {
             console.log(response);
