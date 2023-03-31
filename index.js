@@ -155,9 +155,9 @@ app.put("/:col/:key", async (req, res) => {
 });
 
 
-app.get('/anyapi', function (req, res, next) {
+app.get('/anyapi', async function (req, res, next) {
     var body = new EventEmitter();
-    request({
+    await request({
         url: "https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming",
         method: "POST",
         json: {
@@ -201,7 +201,7 @@ app.get('/anyapi', function (req, res, next) {
         
     })
 
-    request({
+    await request({
         headers: {
             'Content-Type': 'application/json'
         },
