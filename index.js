@@ -200,6 +200,11 @@ app.get('/anyapi', function (req, res, next) {
         console.log(msg);
         await sendMessage(msg);
     })
+
+    function sendMessage(msg) {
+        console.log(msg);
+    }
+
     // await request({
     //   headers: {
     //     'Content-Type': 'application/json'
@@ -264,7 +269,7 @@ function getData() {
     })
 }
 
-async function sendMessage(msg) {
+async function sendMessageeeeeeeeeeeeeeeeeeee(msg) {
     await request({
         headers: {
             'Content-Type': 'application/json'
