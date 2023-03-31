@@ -179,7 +179,6 @@ app.get('/anyapi', async function (req, res, next) {
 
 async function getData() {
     var body = new EventEmitter();
-    var msg;
     await request({
         url: "https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming",
         method: "POST",
@@ -208,8 +207,8 @@ async function getData() {
         body.emit('update');
     });
 
-    const message = await body.on('update', function () {
-        
+    body.on('update', function () {
+        let msg;
         let arr = body.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
         const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
         res.json(sorting);
@@ -221,13 +220,13 @@ async function getData() {
         const harga = top.map(({ harga }) => harga)
         const tanggal = top.map(({ tanggal }) => tanggal)
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
-        return msg;
+        body.data = msg
     })
-
-    console.log(message);
+    console.log(body.data);
 }
 
-async function sendMessage(msg) {
+async function sendMessage() {
+
     await request({
         headers: {
             'Content-Type': 'application/json'
