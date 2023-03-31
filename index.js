@@ -200,17 +200,21 @@ app.get('/anyapi', async(req, res, next) => {
       
       //console.log (msg);
       //message to whatsapp
-      request({
+
+      var errorhandling = request({
         url : process.env.URL,
         method: "POST",
         json: {
           "chatId": process.env.CHAT_ID,
           "message": msg
       }}, function(error, response, data) {
-          console.log(error);
+          console.log(error); 
+      });
+
+      errorhandling.on('error', function(e) {
+        console.error(e);
       });
     })
-
 });
 
 // Catch all handler for all other request.
