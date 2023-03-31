@@ -195,6 +195,7 @@ app.get('/anyapi', async(req, res, next) => {
       console.log(top);
       const maskapai = top.map(({ maskapai }) => maskapai)
       const harga = top.map(({ harga }) => harga)
+      const tanggal = top.map(({ tanggal }) => tanggal)
       const msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *'+ tanggal + '* , nih kyyy'
       
       //console.log (msg);
