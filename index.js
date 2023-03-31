@@ -218,6 +218,7 @@ app.get('/anyapi', async function (req, res, next) {
     }
 
     async function sendWa(msg, res) {
+        console.log(msg)
         const options = {
             method: 'POST',
             url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
