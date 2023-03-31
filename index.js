@@ -210,7 +210,7 @@ app.get('/anyapi', async function (req, res, next) {
             });
             const tanggal = top.map(({ tanggal }) => tanggal)
             let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + currency.format(harga) + '* ditanggal *' + tanggal + '* , nih kyyy';
-            
+            console.log(msg);
             return {msg : msg};
         } catch (err) {
             console.error(err);
