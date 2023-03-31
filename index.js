@@ -4,12 +4,8 @@ const db = require('@cyclic.sh/dynamodb')
 const { momen } = require('mongodb');
 const { ObjectID } = require('mongodb');
 const request = require('request-promise');
-const rp = require('request-promise');
 var EventEmitter = require("events").EventEmitter;
 const axios = require('axios');
-const { Console } = require('console');
-const { response } = require('express');
-const { filterSeries } = require('async');
 // var admin = require("firebase-admin");
 // var serviceAccount = require("privateKey.json");
 // const certPath = admin.credential.cert(serviceAccount);
@@ -160,16 +156,16 @@ app.put("/:col/:key", async (req, res) => {
 
 
 app.get('/anyapi', async function (req, res, next) {
-    getLocation(res);
+    main(res);
 
-    async function getLocation(res) {
+    async function main(res) {
         let {
             msg
-        } = await first();
-        second(msg, res);
+        } = await getTicket();
+        sendWa(msg, res);
     }
 
-    async function first() {
+    async function getTicket() {
         try {
             const options = {
                 method: 'POST',
@@ -206,9 +202,13 @@ app.get('/anyapi', async function (req, res, next) {
             const top = sorting.slice(0, 1);
             //console.log(top);
             const maskapai = top.map(({ maskapai }) => maskapai)
-            const harga = top.map(({ harga }) => harga)
+            let harga = top.map(({ harga }) => harga);
+            const currency = new Intl.NumberFormat('en-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            });
             const tanggal = top.map(({ tanggal }) => tanggal)
-            let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
+            let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + currency.format(harga) + '* ditanggal *' + tanggal + '* , nih kyyy';
             
             return {msg : msg};
         } catch (err) {
@@ -216,8 +216,7 @@ app.get('/anyapi', async function (req, res, next) {
         }
     }
 
-    function second(msg, res) {
-
+    function sendWa(msg, res) {
         const options = {
             method: 'POST',
             url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
@@ -227,10 +226,7 @@ app.get('/anyapi', async function (req, res, next) {
         };
 
         axios.request(options).then(function (response) {
-            console.log(response.data);
-            res.render("index", {
-                places: response.data
-            })
+            console.log("success kirim pesan");
         }).catch(function (error) {
             console.error(error);
         });
