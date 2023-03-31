@@ -156,7 +156,8 @@ app.put("/:col/:key", async (req, res) => {
 
 app.get('/anyapi', async function (req, res, next) {
     const getDataTiket = await getData();
-    const sendWa = await sendMessage(getDataTiket);
+    //console.log(getDataTiket);
+    //const sendWa = await sendMessage(getDataTiket);
     // res.end must finish in 3 seconds from the initial post on the first line
     res.end() 
 
@@ -207,7 +208,7 @@ async function getData() {
         body.emit('update');
     });
 
-    body.on('update', function () {
+    const message = await body.on('update', function () {
         
         let arr = body.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
         const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
@@ -220,9 +221,10 @@ async function getData() {
         const harga = top.map(({ harga }) => harga)
         const tanggal = top.map(({ tanggal }) => tanggal)
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
-        
+        return msg;
     })
-    return msg;
+
+    console.log(message);
 }
 
 async function sendMessage(msg) {
