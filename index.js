@@ -188,7 +188,7 @@ app.get('/anyapi', async(req, res, next) => {
       let arr = body.data.data.searchList.departureFlights.map(({marketingAirline, fareDetail, departure}) => ({maskapai : marketingAirline.displayName, harga : fareDetail.cheapestFare, tanggal : departure.date}));  
       //const sorting = arr.sort((a, b) => parseFloat(a.harga) - parseFloat(b.harga))
       const sorting = arr.sort(function(a, b) {return a.harga - b.harga});
-      res.json(sorting);
+      // res.json(sorting);
       
       //call top object of array
       const top = sorting.slice(0,1);
@@ -197,10 +197,6 @@ app.get('/anyapi', async(req, res, next) => {
       const harga = top.map(({ harga }) => harga)
       const tanggal = top.map(({ tanggal }) => tanggal)
       const msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *'+ tanggal + '* , nih kyyy'
-      
-      //console.log (msg);
-      //message to whatsapp
-
       request({
         headers: {
           'Content-Type': 'application/json'
@@ -216,6 +212,19 @@ app.get('/anyapi', async(req, res, next) => {
           console.log('body:', body); // Print the HTML for the Google homepage.
           console.log('data:', data); // Print the HTML for the Google homepage.
       });
+      request.post({ url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae", 
+      json: {
+        "chatId": "6285277494909@c.us",
+        "message": msg}
+      , headers: {
+        'Content-Type': 'application/json'
+      }, }, function (e, r, body) {
+        console.error('error:', e); // Print the error if one occurred
+          console.log('statusCode:', r && r.statusCode); // Print the response status code if a response was received
+          console.log('body:', body); // Print the HTML for the Google homepage.
+          //console.log('data:', data); // Print the HTML for the Google homepage.
+    });
+      res.json(sorting);
     })
 });
 
