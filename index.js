@@ -182,8 +182,20 @@ app.get('/anyapi', async function (req, res, next) {
             ]
         }})
         .then(function (htmlString) {
-            console.log(htmlString.data)
-            console.log(htmlString)
+            //console.log(htmlString.data)
+            //console.log(htmlString)
+            let arr = htmlString.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
+            const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
+            res.json(sorting);
+
+            //call top object of array
+            const top = sorting.slice(0, 1);
+            //console.log(top);
+            const maskapai = top.map(({ maskapai }) => maskapai)
+            const harga = top.map(({ harga }) => harga)
+            const tanggal = top.map(({ tanggal }) => tanggal)
+            let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
+            console.log(msg);
         })
         .catch(function (err) {
             // Crawling failed...
