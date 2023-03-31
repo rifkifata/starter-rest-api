@@ -182,6 +182,7 @@ app.get('/anyapi', async function (req, res, next) {
         }})
         .then(function (htmlString) {
             console.log(htmlString.data)
+            console.log(htmlString)
         })
         .catch(function (err) {
             // Crawling failed...
