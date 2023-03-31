@@ -217,8 +217,7 @@ app.get('/anyapi', async function (req, res, next) {
         }
     }
 
-    async function sendWa(msg, res) {
-        console.log(msg)
+    function sendWa(msg, res) {
         const options = {
             method: 'POST',
             url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
@@ -226,9 +225,8 @@ app.get('/anyapi', async function (req, res, next) {
                 'Host': 'api.callmebot.com'
             }
         };
-        console.log(options)
 
-        await axios.request(options).then(function (response) {
+        axios.request(options).then(function (response) {
             console.log(response);
         }).catch(function (error) {
             console.error(error);
