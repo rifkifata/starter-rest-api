@@ -206,7 +206,7 @@ app.get('/anyapi', async function (req, res, next) {
             let harga = top.map(({ harga }) => harga);
             const currency = new Intl.NumberFormat('en-ID', {
                 style: 'currency',
-                currency: 'Rp.'
+                currency: 'IDR'
             });
             const tanggal = top.map(({ tanggal }) => tanggal)
             let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + currency.format(harga) + '* ditanggal *' + tanggal + '* , nih kyyy';
