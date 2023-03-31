@@ -4,6 +4,7 @@ const db = require('@cyclic.sh/dynamodb')
 const { momen } = require('mongodb');
 const { ObjectID } = require('mongodb');
 const request = require('request-promise');
+const rp = require('request-promise');
 var EventEmitter = require("events").EventEmitter;
 const axios = require('axios');
 // var admin = require("firebase-admin");
