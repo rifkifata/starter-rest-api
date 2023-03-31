@@ -163,10 +163,12 @@ app.get('/anyapi', async function (req, res, next) {
     getLocation(res);
 
     async function getLocation(res) {
-        let {
+        /*let {
             msg
         } = await first();
-        second(msg, res);
+        second(msg, res);*/
+        const a = first();
+        console.log(a);
     }
 
     ///
@@ -197,7 +199,9 @@ app.get('/anyapi', async function (req, res, next) {
                 }
             };
 
-            let res = await axios(options)
+            let res = await axios(options);
+            console.log(res.response.data.data);
+/*
             let arr = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
             const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
             //res.json(sorting);
@@ -211,7 +215,7 @@ app.get('/anyapi', async function (req, res, next) {
             let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
             // Don't forget to return something   
             console.log(msg);
-            return {msg : msg};
+            return {msg : msg};*/
         } catch (err) {
             console.error(err);
         }
