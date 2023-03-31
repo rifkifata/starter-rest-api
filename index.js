@@ -206,18 +206,18 @@ app.get('/anyapi', async function (req, res, next) {
             let harga = top.map(({ harga }) => harga);
             const currency = new Intl.NumberFormat('en-ID', {
                 style: 'currency',
-                currency: 'IDR'
+                currency: 'Rp.'
             });
             const tanggal = top.map(({ tanggal }) => tanggal)
             let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + currency.format(harga) + '* ditanggal *' + tanggal + '* , nih kyyy';
-            console.log(msg);
+            
             return {msg : msg};
         } catch (err) {
             console.error(err);
         }
     }
 
-    function sendWa(msg, res) {
+    async function sendWa(msg, res) {
         const options = {
             method: 'POST',
             url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
@@ -226,7 +226,7 @@ app.get('/anyapi', async function (req, res, next) {
             }
         };
 
-        axios.request(options).then(function (response) {
+        await axios.request(options).then(function (response) {
             console.log("success kirim pesan");
         }).catch(function (error) {
             console.error(error);
