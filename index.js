@@ -155,91 +155,61 @@ app.put("/:col/:key", async (req, res) => {
 
 app.get('/anyapi', async(req, res, next) => {
     var body = new EventEmitter();
-    // request({
-    //   url : "https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming",
-    //   method: "POST",
-    //   json: {
-    //     "requestItems": [
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jEyKEf0T6jhTqogS5QSHqaYrI93wNWcFgvlTINGpM46o",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jLJA7G0QaH2lAceGwyf3U1_4b0L8ASmzc_7PDvdyRUJU",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jsZTjBPHUZI1-Z4R_iKFMXxfHNutk_VfNMuvSOh9Is8U",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jBhQe6cYOekGwRW9bW7d4q6AHAbvXkTLlNHenCht5_QA",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jfT2S06WdIqQZ3PxOij-QJ4FN3lWa0iJRoLYDIgdaepc",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6j7ytyvBHbceP3Fv6SOLprErdxmu5IbitoiyoH64jZW_4",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jQcFkuVgmkD-vgJbX-5UZZk2MgiDxbJ0Qn1UevSC_8L4",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jO4DCz8FpWgc5Bwk1SfOf4tYwY6dEMnWHK-sTk-3UphU",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jxqbRAcl2osE9aR2Gi4E1y7Uc4Wq86__lZPRLOSfKeDI",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jW2u-qtqQETUbifXhloSnMRbRxwLtcCeYWI_0U1gT36Q",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jtYNWEaUSautd39NbkdFB5MmAOZV_-BrCCgWVYMd6AKA",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5F56DDSTjnGj7Jj83x6wUTzSylhVHYESAlOxAVNI2uC54",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5FPa2yi99nvCF8GJSEq05WJitZ72iyTL_MyOyTc2bDhDE",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5Fl7jvkN-a2PPCCugcctPaVygjQUgs6aG0KTGsXRER_Ow",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5FDf8hYPtF_Ak1NfOpio_Ncn4-TuhK132lkEIETeIszPc",
-    //         "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5F3tBy-IOVg95Tpcr9ahVaSQNMZ8tkYAWZX6vrE_B5-js"
-    //     ]
-    //   }}, function(error, response, data) {
-    //     body.data = data;
-    //     body.emit('update');
-    // });
-      request({
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
-        method: "POST",
-        json: {
-          "chatId": "6285277494909@c.us",
-          "message": "sdasda"}
-        }, function(error, response, data) {
-          console.error('error:', error); // Print the error if one occurred
-          console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-          console.log('body:', body); // Print the HTML for the Google homepage.
-          console.log('data:', data); // Print the HTML for the Google homepage.
-          body.data = data;
-          body.emit('update');
-      });
+    let msg;
+    request({
+      url : "https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming",
+      method: "POST",
+      json: {
+        "requestItems": [
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jEyKEf0T6jhTqogS5QSHqaYrI93wNWcFgvlTINGpM46o",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jLJA7G0QaH2lAceGwyf3U1_4b0L8ASmzc_7PDvdyRUJU",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jsZTjBPHUZI1-Z4R_iKFMXxfHNutk_VfNMuvSOh9Is8U",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jBhQe6cYOekGwRW9bW7d4q6AHAbvXkTLlNHenCht5_QA",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jfT2S06WdIqQZ3PxOij-QJ4FN3lWa0iJRoLYDIgdaepc",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6j7ytyvBHbceP3Fv6SOLprErdxmu5IbitoiyoH64jZW_4",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jQcFkuVgmkD-vgJbX-5UZZk2MgiDxbJ0Qn1UevSC_8L4",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jO4DCz8FpWgc5Bwk1SfOf4tYwY6dEMnWHK-sTk-3UphU",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jxqbRAcl2osE9aR2Gi4E1y7Uc4Wq86__lZPRLOSfKeDI",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jW2u-qtqQETUbifXhloSnMRbRxwLtcCeYWI_0U1gT36Q",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5BTHMrx6zRgfr4r9hhEyp6jtYNWEaUSautd39NbkdFB5MmAOZV_-BrCCgWVYMd6AKA",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5F56DDSTjnGj7Jj83x6wUTzSylhVHYESAlOxAVNI2uC54",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5FPa2yi99nvCF8GJSEq05WJitZ72iyTL_MyOyTc2bDhDE",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5Fl7jvkN-a2PPCCugcctPaVygjQUgs6aG0KTGsXRER_Ow",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5FDf8hYPtF_Ak1NfOpio_Ncn4-TuhK132lkEIETeIszPc",
+            "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5F3tBy-IOVg95Tpcr9ahVaSQNMZ8tkYAWZX6vrE_B5-js"
+        ]
+      }}, function(error, response, data) {
+        body.data = data;
+        body.emit('update');
+    });
     body.on('update', function () {
-      //let arr = body.data.data.searchList.departureFlights.map(({marketingAirline, fareDetail, departure}) => ({maskapai : marketingAirline.displayName, harga : fareDetail.cheapestFare, tanggal : departure.date})); 
-      //const sorting = arr.sort(function(a, b) {return a.harga - b.harga});
-       res.json(body.data);
+      let arr = body.data.data.searchList.departureFlights.map(({marketingAirline, fareDetail, departure}) => ({maskapai : marketingAirline.displayName, harga : fareDetail.cheapestFare, tanggal : departure.date})); 
+      const sorting = arr.sort(function(a, b) {return a.harga - b.harga});
+      res.json(body.data);
       
       //call top object of array
-      // const top = sorting.slice(0,1);
-      // console.log(top);
-      // const maskapai = top.map(({ maskapai }) => maskapai)
-      // const harga = top.map(({ harga }) => harga)
-      // const tanggal = top.map(({ tanggal }) => tanggal)
-      // const msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *'+ tanggal + '* , nih kyyy'
-
-      // request({
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
-      //   method: "POST",
-      //   json: {
-      //     "chatId": "6285277494909@c.us",
-      //     "message": msg}
-      //   }, function(error, response, data) {
-      //     console.error('error:', error); // Print the error if one occurred
-      //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-      //     console.log('body:', body); // Print the HTML for the Google homepage.
-      //     console.log('data:', data); // Print the HTML for the Google homepage.
-      // });
-    //   request.post({ url: "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae", 
-    //   json: {
-    //     "chatId": "6285277494909@c.us",
-    //     "message": msg}
-    //   , headers: {
-    //     'Content-Type': 'application/json'
-    //   }, }, function (e, r, body) {
-    //     console.error('error:', e); // Print the error if one occurred
-    //       console.log('statusCode:', r && r.statusCode); // Print the response status code if a response was received
-    //       console.log('body:', body); // Print the HTML for the Google homepage.
-    //       //console.log('data:', data); // Print the HTML for the Google homepage.
-    // });
-     // res.json(sorting);
+      const top = sorting.slice(0,1);
+      console.log(top);
+      const maskapai = top.map(({ maskapai }) => maskapai)
+      const harga = top.map(({ harga }) => harga)
+      const tanggal = top.map(({ tanggal }) => tanggal)
+      msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *'+ tanggal + '* , nih kyyy'
     })
+    request({
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url : "https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae",
+      method: "POST",
+      json: {
+        "chatId": "6285277494909@c.us",
+        "message": msg}
+      }, function(error, response, data) {
+        console.error('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        console.log('body:', body); // Print the HTML for the Google homepage.
+        console.log('data:', data); // Print the HTML for the Google homepage.
+    });
 });
 
 // Catch all handler for all other request.
