@@ -220,6 +220,7 @@ async function getData() {
         const harga = top.map(({ harga }) => harga)
         const tanggal = top.map(({ tanggal }) => tanggal)
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
+        console.log(msg);
         await sendMessage(msg);
     })
 }
