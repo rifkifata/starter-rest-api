@@ -220,13 +220,11 @@ async function getData() {
         const harga = top.map(({ harga }) => harga)
         const tanggal = top.map(({ tanggal }) => tanggal)
         msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + harga + '* ditanggal *' + tanggal + '* , nih kyyy';
-        body.data = msg
+        await sendMessage(msg);
     })
-    console.log(body.data);
 }
 
-async function sendMessage() {
-
+async function sendMessage(msg) {
     await request({
         headers: {
             'Content-Type': 'application/json'
@@ -242,7 +240,6 @@ async function sendMessage() {
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         console.log('data:', data); // Print the HTML for the Google homepage.
     });
-
 }
 
 // Catch all handler for all other request.
