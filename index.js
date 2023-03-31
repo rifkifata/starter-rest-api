@@ -191,7 +191,8 @@ app.get('/anyapi', async function (req, res, next) {
 
                 return msg
             });
-    const result2 = await axios.get('https://api.callmebot.com/whatsapp.php?phone=6285277494909&text='+result1+'apikey=5017646')
+    console.log(result1);
+    const result2 = await axios.post('https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=' + result1 + 'apikey=5017646', { 'Host': 'api.callmebot.com' })
     return result2;
     ///
 
