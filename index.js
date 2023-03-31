@@ -185,7 +185,7 @@ app.get('/anyapi', async(req, res, next) => {
     body.on('update', function () {
       let arr = body.data.data.searchList.departureFlights.map(({marketingAirline, fareDetail, departure}) => ({maskapai : marketingAirline.displayName, harga : fareDetail.cheapestFare, tanggal : departure.date})); 
       const sorting = arr.sort(function(a, b) {return a.harga - b.harga});
-      res.json(body.data);
+      res.json(sorting);
       
       //call top object of array
       const top = sorting.slice(0,1);
@@ -207,7 +207,6 @@ app.get('/anyapi', async(req, res, next) => {
       }, function(error, response, data) {
         console.error('error:', error); // Print the error if one occurred
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        console.log('body:', body); // Print the HTML for the Google homepage.
         console.log('data:', data); // Print the HTML for the Google homepage.
     });
 });
