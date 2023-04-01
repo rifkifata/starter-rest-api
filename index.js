@@ -209,12 +209,12 @@ app.get('/anyapi', function (req, res, next) {
                 const tanggal = top.map(({ tanggal }) => tanggal)
                 let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + currency.format(harga) + '* ditanggal *' + tanggal + '* , nih kyyy';
 
-                return { msg: msg };
+                return msg;
             }).catch(function (error) {
                 console.error(error);
             });
+            return {msg : abc}
             
-           
         } catch (err) {
             console.error(err);
         }
