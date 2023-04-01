@@ -213,6 +213,7 @@ app.get('/anyapi', function (req, res, next) {
             }).catch(function (error) {
                 console.error(error);
             });
+            console.log(abc)
             return {msg : abc}
             
         } catch (err) {
@@ -220,7 +221,8 @@ app.get('/anyapi', function (req, res, next) {
         }
     }
 
-    function sendWa(msg, res) {
+    async function sendWa(msg, res) {
+        await new Promise(resolve => setTimeout(resolve, 5000));
         const options = {
             method: 'POST',
             url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
