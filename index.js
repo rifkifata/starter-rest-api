@@ -192,25 +192,29 @@ app.get('/anyapi', function (req, res, next) {
                 }
             };
 
-            let abc = await axios(options);
-            
-            let arr = abc.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
-            const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
-            res.json(sorting);
+            let abc = await axios.request(options).then(function (response) {
+                let arr = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
+                const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
+                res.json(sorting);
 
-            //call top object of array
-            const top = sorting.slice(0, 1);
-            //console.log(top);
-            const maskapai = top.map(({ maskapai }) => maskapai)
-            let harga = top.map(({ harga }) => harga);
-            const currency = new Intl.NumberFormat('en-ID', {
-                style: 'currency',
-                currency: 'IDR'
+                //call top object of array
+                const top = sorting.slice(0, 1);
+                //console.log(top);
+                const maskapai = top.map(({ maskapai }) => maskapai)
+                let harga = top.map(({ harga }) => harga);
+                const currency = new Intl.NumberFormat('en-ID', {
+                    style: 'currency',
+                    currency: 'IDR'
+                });
+                const tanggal = top.map(({ tanggal }) => tanggal)
+                let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + currency.format(harga) + '* ditanggal *' + tanggal + '* , nih kyyy';
+
+                return { msg: msg };
+            }).catch(function (error) {
+                console.error(error);
             });
-            const tanggal = top.map(({ tanggal }) => tanggal)
-            let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + currency.format(harga) + '* ditanggal *' + tanggal + '* , nih kyyy';
             
-            return {msg : msg};
+           
         } catch (err) {
             console.error(err);
         }
