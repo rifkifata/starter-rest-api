@@ -165,7 +165,7 @@ app.get('/anyapi', function (req, res, next) {
         sendWa(msg, res);
     }
 
-    async function getTicket() {
+    function getTicket() {
         try {
             const options = {
                 method: 'POST',
@@ -192,7 +192,7 @@ app.get('/anyapi', function (req, res, next) {
                 }
             };
 
-            let abc  = await axios(options);
+            let abc  = axios(options);
             
             let arr = abc.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
             const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
