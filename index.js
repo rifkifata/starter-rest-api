@@ -158,14 +158,14 @@ app.put("/:col/:key", async (req, res) => {
 app.get('/anyapi', function (req, res, next) {
     main(res);
 
-    async function main(res) {
+    function main(res) {
         let {
             msg
-        } = await getTicket();
+        } = getTicket();
         sendWa(msg, res);
     }
 
-    function getTicket() {
+    async function getTicket() {
         try {
             const options = {
                 method: 'POST',
@@ -192,7 +192,7 @@ app.get('/anyapi', function (req, res, next) {
                 }
             };
 
-            let abc  = axios(options);
+            let abc = await axios(options);
             
             let arr = abc.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date }));
             const sorting = arr.sort(function (a, b) { return a.harga - b.harga });
