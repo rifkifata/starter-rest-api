@@ -155,7 +155,7 @@ app.put("/:col/:key", async (req, res) => {
 });
 
 
-app.get('/anyapi', async function (req, res, next) {
+app.get('/anyapi', function (req, res, next) {
     main(res);
 
     async function main(res) {
