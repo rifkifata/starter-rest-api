@@ -224,12 +224,12 @@ app.get('/anyapi', function (req, res, next) {
                 'Host': 'api.callmebot.com'
             }
         };
-
         axios.request(options).then(function (response) {
             console.log(response);
         }).catch(function (error) {
             console.error(error);
         });
+        console.log(msg)
     }
 
 
