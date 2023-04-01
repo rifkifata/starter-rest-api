@@ -156,16 +156,16 @@ app.put("/:col/:key", async (req, res) => {
 
 
 app.get('/anyapi', async function (req, res, next) {
-    await main(res);
+    main(res);
 
-    async function main(res) {
+    function main(res) {
         let {
             msg
         } = await getTicket();
-        await sendWa(msg, res);
+        sendWa(msg, res);
     }
 
-    async function getTicket() {
+    function getTicket() {
         try {
             const options = {
                 method: 'POST',
@@ -216,7 +216,7 @@ app.get('/anyapi', async function (req, res, next) {
         }
     }
 
-    async function sendWa(msg, res) {
+    function sendWa(msg, res) {
         const options = {
             method: 'POST',
             url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
