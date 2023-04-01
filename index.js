@@ -159,10 +159,9 @@ app.get('/anyapi', function (req, res, next) {
     main(res);
 
     async function main(res) {
-        let {
-            msg
-        } = await getTicket();
-        sendWa(msg, res);
+        let { msg } = await getTicket();
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        await sendWa(msg, res);
     }
 
     async function getTicket() {
@@ -222,7 +221,6 @@ app.get('/anyapi', function (req, res, next) {
     }
 
     async function sendWa(msg, res) {
-        await new Promise(resolve => setTimeout(resolve, 5000));
         const options = {
             method: 'POST',
             url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
