@@ -158,10 +158,10 @@ app.put("/:col/:key", async (req, res) => {
 app.get('/anyapi', function (req, res, next) {
     main(res);
 
-    function main(res) {
+    async function main(res) {
         let {
             msg
-        } = getTicket();
+        } = await getTicket();
         sendWa(msg, res);
     }
 
