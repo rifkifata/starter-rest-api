@@ -158,14 +158,14 @@ app.put("/:col/:key", async (req, res) => {
 app.get('/anyapi', async function (req, res, next) {
     main(res);
 
-    function main(res) {
+    async function main(res) {
         let {
             msg
         } = await getTicket();
         sendWa(msg, res);
     }
 
-    function getTicket() {
+    async function getTicket() {
         try {
             const options = {
                 method: 'POST',
@@ -225,7 +225,7 @@ app.get('/anyapi', async function (req, res, next) {
             }
         };
 
-        await axios.request(options).then(function (response) {
+        axios.request(options).then(function (response) {
             console.log(response);
         }).catch(function (error) {
             console.error(error);
