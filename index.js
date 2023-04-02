@@ -159,8 +159,8 @@ app.get('/anyapi', function (req, res, next) {
     main(res);
 
     async function main(res) {
-        let { msg } = await getTicket();
-        await sendWa(msg, res);
+        //let { msg } = await getTicket();
+        await sendWa("asd", res);
     }
 
     async function getTicket() {
