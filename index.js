@@ -184,7 +184,7 @@ app.get('/anyapi', function (req, res, next) {
     axios.request(options)
         .then((response) => {
             //console.log(response)
-            let pesan = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date })).sort(function (a, b) { return a.harga - b.harga });
+            let pesan = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date })).sort(function (a, b) { return a.harga - b.harga }).slice(0, 1);;
             console.log(pesan)
             return axios.request({
                 method: 'POST',
