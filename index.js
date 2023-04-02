@@ -160,7 +160,6 @@ app.get('/anyapi', function (req, res, next) {
 
     async function main(res) {
         let { msg } = await getTicket();
-        await new Promise(resolve => setTimeout(resolve, 5000));
         await sendWa(msg, res);
     }
 
@@ -222,13 +221,10 @@ app.get('/anyapi', function (req, res, next) {
     async function sendWa(msg, res) {
         const options = {
             method: 'POST',
-            url: `https://api.green-api.com/waInstance1101805072/SendMessage/954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae`,
+            url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
             headers: {
-                'Content-Type': 'application/json'
-            },
-            json: {
-         "chatId": "6285277494909@c.us",
-         "message": msg}
+                'Host': 'api.callmebot.com'
+            }
         };
         await axios.request(options).then(function (response) {
             console.log(response);
