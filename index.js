@@ -183,7 +183,9 @@ app.get('/anyapi', function (req, res, next) {
 
     axios.request(options)
         .then((response) => {
+            console.log(response)
             let pesan = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date })).sort(function (a, b) { return a.harga - b.harga });
+            console.log(pesan)
             return axios.request({
                 method: 'POST',
                 url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${pesan}&apikey=5017646`,
@@ -194,7 +196,7 @@ app.get('/anyapi', function (req, res, next) {
             ); // using response.data
         })
         .then((response) => {
-            console.log('Response', response);
+            //console.log('Response', response);
         });
 /*
     main(res);
