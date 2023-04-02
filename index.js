@@ -155,7 +155,7 @@ app.put("/:col/:key", async (req, res) => {
 });
 
 
-app.get('/anyapi', function (req, res, next) {
+app.get('/anyapi', async function (req, res, next) {
     const options = {
         method: 'POST',
         url: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
@@ -180,7 +180,7 @@ app.get('/anyapi', function (req, res, next) {
             ]
         }
     };
-    axios.request(options)
+    await axios.request(options)
         .then((response) => {
             let pesan = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date })).sort(function (a, b) { return a.harga - b.harga }).slice(0, 1);;
             
@@ -193,7 +193,7 @@ app.get('/anyapi', function (req, res, next) {
             const tanggal = pesan.map(({ tanggal }) => tanggal)
             let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
             
-            return axios.request({
+            return await axios.request({
                 method: 'POST',
                 url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
                 headers: {
