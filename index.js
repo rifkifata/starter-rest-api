@@ -185,10 +185,17 @@ app.get('/anyapi', function (req, res, next) {
         .then((response) => {
             //console.log(response)
             let pesan = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date })).sort(function (a, b) { return a.harga - b.harga }).slice(0, 1);;
-            console.log(pesan)
+            const maskapai = pesan.map(({ maskapai }) => maskapai)
+            let harga = pesan.map(({ harga }) => harga);
+            const currency = new Intl.NumberFormat('en-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            });
+            const tanggal = pesan.map(({ tanggal }) => tanggal)
+            let msg = 'halo ikyganteng, ada maskapai *' + maskapai + '* seharga *' + currency.format(harga) + '* ditanggal *' + tanggal + '* , nih kyyy';
             return axios.request({
                 method: 'POST',
-                url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${pesan}&apikey=5017646`,
+                url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
                 headers: {
                     'Host': 'api.callmebot.com'
                 }
