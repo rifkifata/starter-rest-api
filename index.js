@@ -183,7 +183,7 @@ app.get('/anyapi', function (req, res, next) {
     axios.request(options)
         .then((response) => {
             let pesan = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date })).sort(function (a, b) { return a.harga - b.harga }).slice(0, 1);;
-            res.json.send(pesan);
+            
             const maskapai = pesan.map(({ maskapai }) => maskapai)
             let harga = pesan.map(({ harga }) => harga);
             const currency = new Intl.NumberFormat('en-ID', {
@@ -192,6 +192,11 @@ app.get('/anyapi', function (req, res, next) {
             });
             const tanggal = pesan.map(({ tanggal }) => tanggal)
             let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
+            res.status(200).json({
+                status: 'success',
+                results: tours.length,
+                data: pesan
+            });
             return axios.request({
                 method: 'POST',
                 url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
@@ -223,7 +228,6 @@ app.get('/anyapi', function (req, res, next) {
             }
             console.log(error.config);
         });
-    res.status(200);
     // await request({
     //   headers: {
     //     'Content-Type': 'application/json'
