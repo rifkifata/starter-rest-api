@@ -156,7 +156,6 @@ app.put("/:col/:key", async (req, res) => {
 
 
 app.get('/anyapi', function (req, res, next) {
-
     const options = {
         method: 'POST',
         url: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
@@ -184,6 +183,7 @@ app.get('/anyapi', function (req, res, next) {
     axios.request(options)
         .then((response) => {
             let pesan = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date })).sort(function (a, b) { return a.harga - b.harga }).slice(0, 1);;
+            res.json(pesan);
             const maskapai = pesan.map(({ maskapai }) => maskapai)
             let harga = pesan.map(({ harga }) => harga);
             const currency = new Intl.NumberFormat('en-ID', {
@@ -223,7 +223,7 @@ app.get('/anyapi', function (req, res, next) {
             }
             console.log(error.config);
         });
-    console.log(res);
+    res.status(200).send('Aman')
     // await request({
     //   headers: {
     //     'Content-Type': 'application/json'
