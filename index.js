@@ -193,7 +193,7 @@ app.get('/anyapi', async function (req, res, next) {
             const tanggal = pesan.map(({ tanggal }) => tanggal)
             let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
             
-            return await axios.request({
+            return axios.request({
                 method: 'POST',
                 url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
                 headers: {
