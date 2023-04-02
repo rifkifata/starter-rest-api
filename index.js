@@ -155,7 +155,7 @@ app.put("/:col/:key", async (req, res) => {
 });
 
 
-app.get('/anyapi', async function (req, res, next) {
+app.get('/jobTicket', async function (req, res, next) {
     const options = {
         method: 'POST',
         url: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
@@ -199,32 +199,8 @@ app.get('/anyapi', async function (req, res, next) {
                 headers: {
                     'Host': 'api.callmebot.com'
                 }
-            }
-            ).catch(function (error) {
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log('Error', error.message);
-                }
-                console.log(error.config);
-            });
-        }).catch(function (error) {
-            if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log('Error', error.message);
-            }
-            console.log(error.config);
-        });
-
+            })
+        })
     res.status(200).json({
         status: 'success',
         data: "Sended to WA"
