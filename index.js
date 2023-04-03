@@ -7,18 +7,8 @@ const {
 const {
   ObjectID
 } = require('mongodb');
-const request = require('request-promise');
-var EventEmitter = require("events").EventEmitter;
 const axios = require('axios');
-// var admin = require("firebase-admin");
-// var serviceAccount = require("privateKey.json");
-// const certPath = admin.credential.cert(serviceAccount);
-// var FCM = require('fcm-node');
-// var serverKey = 'AAAAegb2XO8:APA91bFkBAnP0QZalGJOkDOiKcTlreKr35f9WKsJgVa_LAq4YTjp6lvrL1lLXoWLmYsjNoqjAUKZbhN1wv5j5fNs0prnEHXH4bSHT2FORv_Jirs-0BelhttmBCSHev4bkspkr6L0O_89';
-// var fcm = new FCM(serverKey);
 
-
-//const ObjectID = require('mongodb').ObjectID
 app.set('view engine', 'ejs');
 app.use(express.json())
 app.use(express.urlencoded({
