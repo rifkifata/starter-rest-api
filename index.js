@@ -181,7 +181,7 @@ app.get('/jobTicket', async function (req, res, next) {
         }
     };
     await axios.request(options)
-        .then((response) => {
+        .then(async function (response) {
             let pesan = response.data.data.searchList.departureFlights.map(({ marketingAirline, fareDetail, departure }) => ({ maskapai: marketingAirline.displayName, harga: fareDetail.cheapestFare, tanggal: departure.date })).sort(function (a, b) { return a.harga - b.harga }).slice(0, 1);;
             
             const maskapai = pesan.map(({ maskapai }) => maskapai)
@@ -193,19 +193,20 @@ app.get('/jobTicket', async function (req, res, next) {
             const tanggal = pesan.map(({ tanggal }) => tanggal)
             let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
             
-            axios.all([
-              axios.request({
+            
+              const iky = await axios.request({
                 method: 'POST',
               url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
               headers: {
                   'Host': 'api.callmebot.com'
-              }}), 
-              axios.request({method: 'POST',
+              }})
+              const reja = await axios.request({method: 'POST',
               url: `https://api.callmebot.com/whatsapp.php?phone=6281370668528&text=${msg}&apikey=7872712`,
               headers: {
                   'Host': 'api.callmebot.com'
               }})
-            ])
+
+            await Promise.all([iky, reja]);
 
             // axios.request({
             //     method: 'POST',
