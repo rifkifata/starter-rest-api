@@ -177,7 +177,17 @@ const requestItems = {
   "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5F3tBy-IOVg95Tpcr9ahVaSQNMZ8tkYAWZX6vrE_B5-js"
 ],
 pkucgk : [
-
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8eziLrcZUMblwJSWl0dlOY6UwwzNRVciZh1_WbwC0HWg",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8Yzx9CeCouPdbqFVcjP38Zg0srW4GFRVXUiNcbH6gnBw",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8LOffAn8iETLaJQlDQfbu4Xj9y31rg7u9XtXtwrSAYyc",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8aUEd58Peo6hn-ZJXn1eVo2rfcs5EEhciXNWkr3sWF6o",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8rZGOoI-Uvz2NZdOBT6MuWI9nVHeAg5EARTMypfdh5uI",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8JNbZ4H-wpeFCiWHuCdixDv0u-31Kq2f6eYptx3XBA-M",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8B_9aj4uz6zLXWtoEmS24BfDrHNpcWHIbAIUfdlu4azQ",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ81wf6MREezv3aJYyFxeC5O6joyVP0BJDcQlpp-sEeH3Q",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8mbSOZjwrCP2-mxMbKFjYNxBjLeLda8WeuC9guiiZhy8",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ82kXNLEWcFSG4hVBYzrGhEfe0EHav2enq6zvgl-FD5YQ",
+"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8BIpfwa28JFOlX95FfQiJC05RebjLJB56i--hOxzb9BQ"
 ],
 cgkkno1504 : [
   "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxPr4hpAmIbRkyPX7fdf4a5XvgPV2qijwNsauCONBRZqU",
@@ -305,6 +315,71 @@ app.get('/jobTicket', async function (req, res, next) {
   //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
   //     console.log('data:', data); // Print the HTML for the Google homepage.
   // });
+})
+
+app.get('/jobTicketYuriza', async function (req, res, next) {
+    const options = {
+        method: 'POST',
+        url: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
+        data: {
+            "requestItems": [
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8eziLrcZUMblwJSWl0dlOY6UwwzNRVciZh1_WbwC0HWg",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8Yzx9CeCouPdbqFVcjP38Zg0srW4GFRVXUiNcbH6gnBw",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8LOffAn8iETLaJQlDQfbu4Xj9y31rg7u9XtXtwrSAYyc",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8aUEd58Peo6hn-ZJXn1eVo2rfcs5EEhciXNWkr3sWF6o",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8rZGOoI-Uvz2NZdOBT6MuWI9nVHeAg5EARTMypfdh5uI",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8JNbZ4H-wpeFCiWHuCdixDv0u-31Kq2f6eYptx3XBA-M",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8B_9aj4uz6zLXWtoEmS24BfDrHNpcWHIbAIUfdlu4azQ",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ81wf6MREezv3aJYyFxeC5O6joyVP0BJDcQlpp-sEeH3Q",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8mbSOZjwrCP2-mxMbKFjYNxBjLeLda8WeuC9guiiZhy8",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ82kXNLEWcFSG4hVBYzrGhEfe0EHav2enq6zvgl-FD5YQ",
+                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8BIpfwa28JFOlX95FfQiJC05RebjLJB56i--hOxzb9BQ"]
+        }
+    };
+    await axios.request(options)
+        .then(async function (response) {
+            let pesan = response.data.data.searchList.departureFlights.map(({
+                marketingAirline,
+                fareDetail,
+                departure
+            }) => ({
+                maskapai: marketingAirline.displayName,
+                harga: fareDetail.cheapestFare,
+                tanggal: departure.date
+            })).sort(function (a, b) {
+                return a.harga - b.harga
+            }).slice(0, 1);
+
+            const maskapai = pesan.map(({
+                maskapai
+            }) => maskapai)
+            let harga = pesan.map(({
+                harga
+            }) => harga);
+            const currency = new Intl.NumberFormat('en-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            });
+            const tanggal = pesan.map(({
+                tanggal
+            }) => tanggal)
+            let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
+
+            const yuriza = await axios.request({
+                method: 'POST',
+                url: `https://api.callmebot.com/whatsapp.php?phone=6281276688199&text=${msg}&apikey=5992443`,
+                headers: {
+                    'Host': 'api.callmebot.com'
+                }
+            })
+            await Promise.all([
+                yuriza
+            ]);
+        })
+    res.status(200).json({
+        status: 'success',
+        data: "Sended to WA"
+    });
 })
 
 // Catch all handler for all other request.
