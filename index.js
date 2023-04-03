@@ -193,21 +193,35 @@ app.get('/jobTicket', async function (req, res, next) {
             const tanggal = pesan.map(({ tanggal }) => tanggal)
             let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
             
-            axios.request({
+            axios.all([
+              axios.request({
                 method: 'POST',
-                url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
-                headers: {
-                    'Host': 'api.callmebot.com'
-                }
-            }).then((response)=>{
-              return axios.request({
-                method: 'POST',
-                url: `https://api.callmebot.com/whatsapp.php?phone=6281370668528&text=${msg}&apikey=7872712`,
-                headers: {
-                    'Host': 'api.callmebot.com'
-                }
-            })
-            })
+              url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
+              headers: {
+                  'Host': 'api.callmebot.com'
+              }}), 
+              axios.request({method: 'POST',
+              url: `https://api.callmebot.com/whatsapp.php?phone=6281370668528&text=${msg}&apikey=7872712`,
+              headers: {
+                  'Host': 'api.callmebot.com'
+              }})
+            ])
+
+            // axios.request({
+            //     method: 'POST',
+            //     url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
+            //     headers: {
+            //         'Host': 'api.callmebot.com'
+            //     }
+            // }).then((response)=>{
+            //   return axios.request({
+            //     method: 'POST',
+            //     url: `https://api.callmebot.com/whatsapp.php?phone=6281370668528&text=${msg}&apikey=7872712`,
+            //     headers: {
+            //         'Host': 'api.callmebot.com'
+            //     }
+            // })
+            // })
         })
     res.status(200).json({
         status: 'success',
