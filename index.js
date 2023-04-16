@@ -8,7 +8,7 @@ const {
   ObjectID
 } = require('mongodb');
 const axios = require('axios');
-
+require('dotenv').config()
 app.set('view engine', 'ejs');
 app.use(express.json())
 app.use(express.urlencoded({
@@ -262,22 +262,31 @@ app.get('/jobTicket', async function (req, res, next) {
 
       const iky = await axios.request({
         method: 'POST',
-        url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
-        headers: {
-          'Host': 'api.callmebot.com'
-        }
-      })
-      const reja = await axios.request({
-        method: 'POST',
-        url: `https://api.callmebot.com/whatsapp.php?phone=6281370668528&text=${msg}&apikey=7872712`,
-        headers: {
-          'Host': 'api.callmebot.com'
-        }
-      })
+        url: `https://api.green-api.com/${process.env.WA_INSTANCE}/SendMessage/${process.env.PARAM_URL}}`,
+        json: {
+               "chatId": `${process.env.CHAT_ID}`,
+               "message": msg}
+             },
+      )
+
+      // const iky = await axios.request({
+      //   method: 'POST',
+      //   url: `https://api.callmebot.com/whatsapp.php?phone=6285277494909&text=${msg}&apikey=5017646`,
+      //   headers: {
+      //     'Host': 'api.callmebot.com'
+      //   }
+      // })
+      // const reja = await axios.request({
+      //   method: 'POST',
+      //   url: `https://api.callmebot.com/whatsapp.php?phone=6281370668528&text=${msg}&apikey=7872712`,
+      //   headers: {
+      //     'Host': 'api.callmebot.com'
+      //   }
+      // })
 
       await Promise.all([
-        iky,
-        reja
+        iky
+        //reja
       ]);
 
       // axios.request({
