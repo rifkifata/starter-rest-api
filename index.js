@@ -265,11 +265,11 @@ app.get('/jobTicket', async function (req, res, next) {
       const whatsAppClient = require('@green-api/whatsapp-api-client')
 
       const restAPI = whatsAppClient.restAPI(({
-          idInstance: "1101805072",
-          apiTokenInstance: "954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae"
+          idInstance: `${process.env.WA_INSTANCE}`,
+          apiTokenInstance: `${process.env.PARAM_URL}`
       }))
 
-      const iky = await restAPI.message.sendMessage("6285277494909@c.us", null, "hello world")
+      const iky = await restAPI.message.sendMessage(`${process.env.CHAT_ID}`, null, msg)
       .then((data) => {
           console.log(data);
       }) ;
