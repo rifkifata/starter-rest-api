@@ -21,6 +21,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+const whatsAppClient = require("@green-api/whatsapp-api-client");
+
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
 // listed in the array.
@@ -260,14 +262,26 @@ app.get('/jobTicket', async function (req, res, next) {
       }) => tanggal)
       let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
 
-      const iky = await axios.request({
-        method: 'POST',
-        url: `https://api.green-api.com/${process.env.WA_INSTANCE}/SendMessage/${process.env.PARAM_URL}}`,
-        json: {
-               "chatId": `${process.env.CHAT_ID}`,
-               "message": msg}
-             },
-      )
+      const whatsAppClient = require('@green-api/whatsapp-api-client')
+
+      const restAPI = whatsAppClient.restAPI(({
+          idInstance: "1101805072",
+          apiTokenInstance: "954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae"
+      }))
+
+      restAPI.message.sendMessage("6285277494909@c.us", null, "hello world")
+      .then((data) => {
+          console.log(data);
+      }) ;
+      
+      // const iky = await axios.request({
+      //   method: 'POST',
+      //   url: `https://api.green-api.com/${process.env.WA_INSTANCE}/SendMessage/${process.env.PARAM_URL}}`,
+      //   json: {
+      //          "chatId": `${process.env.CHAT_ID}`,
+      //          "message": msg}
+      //        },
+      // )
 
       // const iky = await axios.request({
       //   method: 'POST',
