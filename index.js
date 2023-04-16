@@ -260,7 +260,9 @@ app.get('/jobTicket', async function (req, res, next) {
       const tanggal = pesan.map(({
         tanggal
       }) => tanggal)
-      let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
+      let msg = '*' + maskapai + '* ' + currency.format(harga) + ' *' + tanggal + '*'
+
+      //let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
 
       const whatsAppClient = require('@green-api/whatsapp-api-client')
 
