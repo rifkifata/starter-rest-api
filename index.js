@@ -269,7 +269,7 @@ app.get('/jobTicket', async function (req, res, next) {
           apiTokenInstance: "954ba1ea96ed4a2cb99d655ba09984814564f0bbf1a6456cae"
       }))
 
-      restAPI.message.sendMessage("6285277494909@c.us", null, "hello world")
+      const iky = await restAPI.message.sendMessage("6285277494909@c.us", null, "hello world")
       .then((data) => {
           console.log(data);
       }) ;
