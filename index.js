@@ -95,18 +95,17 @@ app.get('/getbykey/:col/:key', async (req, res) => {
 app.get('/gethtml/:link', async (req, res) => {
     const link = 'https://easydrawingguides.com/how-to-draw-a-halloween-pumpkin/' + req.params.link
     console.log(`from hyperlink from ${link}`)
-    let url = [];
     request(link, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('a') //jquery get all hyperlinks
-
+        let url = [];
         $(links).each(function (i, link) {
             //console.log($(link).text() + ':\n  ' + $(link).attr('href'));
             url.push($(link).attr('href'))
         });
+        console.log(url)
     });
-    console.log(url)
-    res.json(url).end()
+    //res.json(url).end()
 })
 
 
