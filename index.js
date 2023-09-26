@@ -93,7 +93,7 @@ app.get('/getbykey/:col/:key', async (req, res) => {
 
 // Get HTML hyper link
 app.get('/gethtml/:link', async (req, res) => {
-    const link = req.params.link
+    const link = 'https://easydrawingguides.com/how-to-draw-a-halloween-pumpkin/' + req.params.link
     console.log(`from hyperlink from ${link}`)
     let url;
     request(link, function (err, resp, body) {
