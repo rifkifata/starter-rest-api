@@ -105,6 +105,7 @@ app.get('/gethtml/:link', async (req, res) => {
             url.push($(link).attr('href'))
         });
     });
+    console.log(url)
     res.json(url).end()
 })
 
