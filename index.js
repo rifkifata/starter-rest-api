@@ -95,7 +95,7 @@ app.get('/getbykey/:col/:key', async (req, res) => {
 app.get('/gethtml/:link', async (req, res) => {
     const link = 'https://easydrawingguides.com/how-to-draw-a-halloween-pumpkin/' + req.params.link
     console.log(`from hyperlink from ${link}`)
-    let url;
+    let url = [];
     request(link, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('a') //jquery get all hyperlinks
