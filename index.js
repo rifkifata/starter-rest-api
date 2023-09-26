@@ -92,8 +92,8 @@ app.get('/getbykey/:col/:key', async (req, res) => {
 })
 
 // Get HTML hyper link
-app.get('/gethtml/:link', async (req, res) => {
-    const link = req.params.link
+app.get('/gethtml', async (req, res) => {
+    const link = 'https://id.wikipedia.org/wiki/Halo'
     console.log(`from hyperlink from ${link}`)
 
     request(link, function (err, resp, body) {
