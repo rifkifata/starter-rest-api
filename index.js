@@ -92,17 +92,20 @@ app.get('/getbykey/:col/:key', async (req, res) => {
 })
 
 // Get HTML hyper link
-app.get('/gethtml', async (req, res) => {
-    const link = 'https://id.wikipedia.org/wiki/Halo'
+app.get('/gethtml/:link', async (req, res) => {
+    const link = req.params.link
     console.log(`from hyperlink from ${link}`)
-
+    let url;
     request(link, function (err, resp, body) {
-        $ = cheerio.load(body);
-        const links = $('a'); //jquery get all hyperlinks
+        $ = cheerio.load(body)
+        const links = $('a') //jquery get all hyperlinks
+
         $(links).each(function (i, link) {
-            console.log($(link).text() + ':\n  ' + $(link).attr('href'));
+            //console.log($(link).text() + ':\n  ' + $(link).attr('href'));
+            url.push($(link).attr('href'))
         });
     });
+    res.json(url).end()
 })
 
 
