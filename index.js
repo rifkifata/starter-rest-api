@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const db = require('@cyclic.sh/dynamodb')
+const cheerio = require('cheerio')
+const request = require('request')
 const {
   momen
 } = require('mongodb');
@@ -88,6 +90,21 @@ app.get('/getbykey/:col/:key', async (req, res) => {
   console.log(JSON.stringify(newitem, null, 2))
   res.json(newitem).end()
 })
+
+// Get HTML hyper link
+app.get('/gethtml/:link', async (req, res) => {
+    const link = req.params.link
+    console.log(`from hyperlink from ${link}`)
+
+    request(link, function (err, resp, body) {
+        $ = cheerio.load(body);
+        const links = $('a'); //jquery get all hyperlinks
+        $(links).each(function (i, link) {
+            console.log($(link).text() + ':\n  ' + $(link).attr('href'));
+        });
+    });
+})
+
 
 //Get all full listing
 /*app.get('/getfull/:col', async (req, res) => {
@@ -177,34 +194,6 @@ const requestItems = {
   "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5Fl7jvkN-a2PPCCugcctPaVygjQUgs6aG0KTGsXRER_Ow",
   "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5FDf8hYPtF_Ak1NfOpio_Ncn4-TuhK132lkEIETeIszPc",
   "qPysQBLP41OSVm8sWJxSE0zL0FxFb1gWrep4FDbQk5Am36YSVPavGhyNW8RBaL5F3tBy-IOVg95Tpcr9ahVaSQNMZ8tkYAWZX6vrE_B5-js"
-],
-pkucgk : [
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8eziLrcZUMblwJSWl0dlOY6UwwzNRVciZh1_WbwC0HWg",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8Yzx9CeCouPdbqFVcjP38Zg0srW4GFRVXUiNcbH6gnBw",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8LOffAn8iETLaJQlDQfbu4Xj9y31rg7u9XtXtwrSAYyc",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8aUEd58Peo6hn-ZJXn1eVo2rfcs5EEhciXNWkr3sWF6o",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8rZGOoI-Uvz2NZdOBT6MuWI9nVHeAg5EARTMypfdh5uI",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8JNbZ4H-wpeFCiWHuCdixDv0u-31Kq2f6eYptx3XBA-M",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8B_9aj4uz6zLXWtoEmS24BfDrHNpcWHIbAIUfdlu4azQ",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ81wf6MREezv3aJYyFxeC5O6joyVP0BJDcQlpp-sEeH3Q",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8mbSOZjwrCP2-mxMbKFjYNxBjLeLda8WeuC9guiiZhy8",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ82kXNLEWcFSG4hVBYzrGhEfe0EHav2enq6zvgl-FD5YQ",
-"qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8BIpfwa28JFOlX95FfQiJC05RebjLJB56i--hOxzb9BQ"
-],
-cgkkno1504 : [
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxPr4hpAmIbRkyPX7fdf4a5XvgPV2qijwNsauCONBRZqU",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxn9_8bvnNS7F7DkgkkhlX6bkKXPrCTR4j5T8p97t6ENc",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxurbprO1ec02J3QYa6qIAK0TA6FD7P9JfuqoZgAeOrgs",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxgIsR45wovaOajVh9d6gFHh45R0LKGK4hR12tFupSeo8",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhx-RsxxW9VNlE2dNS4DEFzqxqxwlYLjZhuGNwgkwObaGg",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxys-kPeTortj40Ae7YOE7pSJXquoZ7Vvop5ELIhmoRD0",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxEvQ6b3Tb0JPhwIStNjKf4MX5QJd4FPDdkx6Ad74FT_M",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxWOWDvA8rwah1iC0dewGx15iTnL7zuGGmcwNEOoHN_RM",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxEuvhpkyXoEJBTFztgIuwQzK3QNlbY16aJibhmIIJ95c",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxjL9jkjBA8XYUb7GpJ6BQ95pe8xbOgLjLq3Elm9SDwpo",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhx4jdR2OIYCc05HQiNY3CuNxYq_nMeAOr0EJxR6D1u59Y",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxi8pnu0xgwSV1ODckYHUJvCVCNM526msbtnsSdFubjp4",
-  "qPysQBLP41OSVm8sWJxSE8mTIPqLp-SDJwrbL6grEV4XnLBluAox8u6BZ6URezhxYzEaiv3QWN0C7unoS3SWvHsQmPAthn5GyFO405vNU7A"
 ]
 }
 // #############################################################################
@@ -340,71 +329,6 @@ app.get('/jobTicket', async function (req, res, next) {
   //     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
   //     console.log('data:', data); // Print the HTML for the Google homepage.
   // });
-})
-
-app.get('/jobTicketYuriza', async function (req, res, next) {
-    const options = {
-        method: 'POST',
-        url: 'https://www.tiket.com/ms-gateway/tix-flight-search/search/streaming',
-        data: {
-            "requestItems": [
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8eziLrcZUMblwJSWl0dlOY6UwwzNRVciZh1_WbwC0HWg",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8Yzx9CeCouPdbqFVcjP38Zg0srW4GFRVXUiNcbH6gnBw",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8LOffAn8iETLaJQlDQfbu4Xj9y31rg7u9XtXtwrSAYyc",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8aUEd58Peo6hn-ZJXn1eVo2rfcs5EEhciXNWkr3sWF6o",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8rZGOoI-Uvz2NZdOBT6MuWI9nVHeAg5EARTMypfdh5uI",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8JNbZ4H-wpeFCiWHuCdixDv0u-31Kq2f6eYptx3XBA-M",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8B_9aj4uz6zLXWtoEmS24BfDrHNpcWHIbAIUfdlu4azQ",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ81wf6MREezv3aJYyFxeC5O6joyVP0BJDcQlpp-sEeH3Q",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8mbSOZjwrCP2-mxMbKFjYNxBjLeLda8WeuC9guiiZhy8",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ82kXNLEWcFSG4hVBYzrGhEfe0EHav2enq6zvgl-FD5YQ",
-                "qPysQBLP41OSVm8sWJxSE2MzPFrqre4PK5Z3PPlY8HT-kpxYPTpijIi7wnGLIUQ8BIpfwa28JFOlX95FfQiJC05RebjLJB56i--hOxzb9BQ"]
-        }
-    };
-    await axios.request(options)
-        .then(async function (response) {
-            let pesan = response.data.data.searchList.departureFlights.map(({
-                marketingAirline,
-                fareDetail,
-                departure
-            }) => ({
-                maskapai: marketingAirline.displayName,
-                harga: fareDetail.cheapestFare,
-                tanggal: departure.date
-            })).sort(function (a, b) {
-                return a.harga - b.harga
-            }).slice(0, 1);
-
-            const maskapai = pesan.map(({
-                maskapai
-            }) => maskapai)
-            let harga = pesan.map(({
-                harga
-            }) => harga);
-            const currency = new Intl.NumberFormat('en-ID', {
-                style: 'currency',
-                currency: 'IDR'
-            });
-            const tanggal = pesan.map(({
-                tanggal
-            }) => tanggal)
-            let msg = '*' + maskapai + '*' + '%0a' + '*' + currency.format(harga) + '*' + '%0a' + tanggal;
-
-            const yuriza = await axios.request({
-                method: 'POST',
-                url: `https://api.callmebot.com/whatsapp.php?phone=6281276688199&text=${msg}&apikey=5992443`,
-                headers: {
-                    'Host': 'api.callmebot.com'
-                }
-            })
-            await Promise.all([
-                yuriza
-            ]);
-        })
-    res.status(200).json({
-        status: 'success',
-        data: "Sended to WA"
-    });
 })
 
 // Catch all handler for all other request.
