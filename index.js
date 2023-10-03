@@ -104,8 +104,9 @@ app.get('/gethtml/:link', async (req, res) => {
     console.log(`from hyperlink from ${link}`)
     request(options, function (err, resp, body) {
         $ = cheerio.load(body)
-        const links = $('a') 
+        const links = $('img') 
         let url = [];
+
         $(links).each(function (i, link) {
             url.push($(link).attr('href'))
         });
