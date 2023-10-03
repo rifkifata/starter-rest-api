@@ -102,7 +102,7 @@ app.get('/gethtml/:link', async (req, res) => {
     };
 
     console.log(`from hyperlink from ${link}`)
-    request(options, function (err, resp, body) {
+/*    request(options, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('img') 
         let url = [];
@@ -111,6 +111,25 @@ app.get('/gethtml/:link', async (req, res) => {
             url.push($(link).attr('href'))
         });
         console.log(url)
+    });*/
+
+    request(req.query.url, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var $ = cheerio.load(body);
+            var reqUrl = url.parse(req.query.url);
+
+            res.send($('img').map(function (i, e) {
+                var srcUrl = url.parse($(e).attr('src'));
+
+                if (!srcUrl.host) {
+                    //return url.resolve(reqUrl, srcUrl);
+                    console.log(url.resolve(reqUrl, srcUrl));
+                } else {
+                    //return url.format(srcUrl);
+                    console.log(url.format(srcUrl));
+                }
+            }));
+        }
     });
     //res.json(url).end()
 })
