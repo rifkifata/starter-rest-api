@@ -116,7 +116,7 @@ app.get('/gethtml/:link', async (req, res) => {
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var $ = cheerio.load(body);
-            var reqUrl = url.parse(req.query.url);
+            var reqUrl = url.parse(link);
 
             res.send($('img').map(function (i, e) {
                 var srcUrl = url.parse($(e).attr('src'));
