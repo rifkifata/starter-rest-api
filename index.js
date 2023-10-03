@@ -113,7 +113,7 @@ app.get('/gethtml/:link', async (req, res) => {
         console.log(url)
     });*/
 
-    request(req.query.url, function (error, response, body) {
+    request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var $ = cheerio.load(body);
             var reqUrl = url.parse(req.query.url);
