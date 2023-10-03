@@ -110,7 +110,9 @@ app.get('/gethtml/:link', async (req, res) => {
         $(links).each(function (i, link) {
             url.push($(link).attr('src'))
         });
-        console.log(url)
+
+        const filtered = url.filter(function (str) { return str.includes("https://easydrawingguides.com/wp-content/uploads")});
+        console.log(filtered)
     });
 /*
     request(options, function (error, response, body) {
