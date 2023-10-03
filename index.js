@@ -94,8 +94,15 @@ app.get('/getbykey/:col/:key', async (req, res) => {
 // Get HTML hyper link
 app.get('/gethtml/:link', async (req, res) => {
     const link = 'https://easydrawingguides.com/' + req.params.link
+    const options = {
+        url: 'https://easydrawingguides.com/' + req.params.link,
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
+        }
+    };
+
     console.log(`from hyperlink from ${link}`)
-    request(link, function (err, resp, body) {
+    request(options, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('a') 
         let url = [];
