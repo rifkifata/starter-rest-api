@@ -103,7 +103,7 @@ app.get('/gethtml/:link', async (req, res) => {
     };
 
     console.log(`from hyperlink from ${link}`)
-    request(options, function (err, resp, body) {
+    let abc = request(options, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('img') 
         let url = [];
@@ -113,8 +113,11 @@ app.get('/gethtml/:link', async (req, res) => {
         });
 
         const filtered = url.filter(function (str) { return str.includes("https://easydrawingguides.com/wp-content/uploads")});
-        console.log(filtered)
+        //console.log(filtered)
+        return filtered
     });
+
+    console.log(abc)
 /*
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
