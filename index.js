@@ -98,12 +98,11 @@ app.get('/gethtml/:link', async (req, res) => {
         url: 'https://easydrawingguides.com/' + req.params.link,
         headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
-        },
-        timeout: 5000
+        }
     };
 
     console.log(`from hyperlink from ${link}`)
-    let abc = request(options, function (err, resp, body) {
+    request(options, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('img') 
         let url = [];
@@ -113,11 +112,11 @@ app.get('/gethtml/:link', async (req, res) => {
         });
 
         const filtered = url.filter(function (str) { return str.includes("https://easydrawingguides.com/wp-content/uploads")});
-        //console.log(filtered)
+        console.log(filtered)
         return filtered
     });
-
-    console.log(abc)
+    //TODO:jangan lupa bikin pake puppeteer harus scroll kebawah, kenapa ? karena ada lazyload 
+    //
 /*
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
