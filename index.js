@@ -98,12 +98,13 @@ app.get('/gethtml/:link', async (req, res) => {
         url: 'https://easydrawingguides.com/' + req.params.link,
         headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
-        }
+        },
+        timeout: 500
     };
 
     console.log(`from hyperlink from ${link}`)
     request(options, function (err, resp, body) {
-        $ = await cheerio.load(body)
+        $ = cheerio.load(body)
         const links = $('img') 
         let url = [];
 
