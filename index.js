@@ -99,7 +99,7 @@ app.get('/gethtml/:link', async (req, res) => {
         headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
         },
-        timeout: 500
+        timeout: 5000
     };
 
     console.log(`from hyperlink from ${link}`)
