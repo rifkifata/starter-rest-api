@@ -102,8 +102,8 @@ app.get('/gethtml/:link', async (req, res) => {
     };
 
     console.log(`from hyperlink from ${link}`)
-    await request(options, function (err, resp, body) {
-        $ = cheerio.load(body)
+    request(options, function (err, resp, body) {
+        $ = await cheerio.load(body)
         const links = $('img') 
         let url = [];
 
