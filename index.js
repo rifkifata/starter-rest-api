@@ -4,6 +4,11 @@ const db = require('@cyclic.sh/dynamodb')
 const cheerio = require('cheerio')
 const request = require('request')
 const puppeteer = require('puppeteer')
+const https = require('https');
+
+'use strict';
+
+const fs = require('fs');
 const {
   momen
 } = require('mongodb');
@@ -102,20 +107,44 @@ app.get('/gethtml/:link', async (req, res) => {
         }
     };
 
-    console.log(`from hyperlink from ${link}`)
-    request(options, function (err, resp, body) {
-        $ = cheerio.load(body)
-        const links = $('img') 
-        let url = [];
+    // request(options, function (err, resp, body) {
+    //     $ = cheerio.load(body)
+    //     const links = $('img') 
+    //     let url = [];
 
-        $(links).each(function (i, link) {
-            url.push($(link).attr('src'))
+    //     $(links).each(function (i, link) {
+    //         url.push($(link).attr('src'))
+    //     });
+
+    //     const filtered = url.filter(function (str) { return str.includes("https://easydrawingguides.com/wp-content/uploads")});
+    //     console.log(filtered)
+    //     return filtered
+    // });
+    
+    (async function main() {
+      try {
+        const browser = await puppeteer.launch();
+        const [page] = await browser.pages();
+    
+        await page.goto(link);
+    
+        const imgURLs = await page.evaluate(() =>
+          Array.from(
+            document.querySelectorAll('#post-2582662'),
+            ({ src }) => src,
+          )
+        );
+        console.log(imgURLs);
+        await browser.close();
+    
+        imgURLs.forEach((imgURL, i) => {
+          console.log(imgURL);
         });
-
-        const filtered = url.filter(function (str) { return str.includes("https://easydrawingguides.com/wp-content/uploads")});
-        console.log(filtered)
-        return filtered
-    });
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+    
     //TODO:jangan lupa bikin pake puppeteer harus scroll kebawah, kenapa ? karena ada lazyload 
     //tembak DB
 /*
