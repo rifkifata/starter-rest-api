@@ -3,6 +3,7 @@ const app = express()
 const db = require('@cyclic.sh/dynamodb')
 const cheerio = require('cheerio')
 const request = require('request')
+const puppeteer = require('puppeteer')
 const {
   momen
 } = require('mongodb');
@@ -116,7 +117,7 @@ app.get('/gethtml/:link', async (req, res) => {
         return filtered
     });
     //TODO:jangan lupa bikin pake puppeteer harus scroll kebawah, kenapa ? karena ada lazyload 
-    //
+    //tembak DB
 /*
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
