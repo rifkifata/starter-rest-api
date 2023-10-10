@@ -112,7 +112,7 @@ app.get('/gethtml/:link', async (req, res) => {
         let url = [];
 
         $(links).each(function (i, link) {
-            url.push($(link).attr('data-cfsrc'))
+            url.push($(link).attr('src'))
         });
 
         const filtered = url.filter(function (str) { return str.includes("https://easydrawingguides.com/wp-content/uploads")});
