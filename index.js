@@ -119,7 +119,14 @@ app.get('/gethtml/:link', async (req, res) => {
         let filtered = url.filter(function (str) { 
           return str.includes("https://easydrawingguides.com/wp-content/uploads") && !str.includes("about-me") && !str.includes("logo")
         });
-        console.log(filtered.toString())
+        filtered = filtered.toString()
+        let trimed = filtered.slice(57, -4);
+        let arr =  [] 
+
+        if (/\d/.test(trimed)=false){
+          arr.push(filtered)
+          arr.push
+        }
 
         //if filtered.includes
         return filtered
@@ -130,7 +137,7 @@ app.get('/gethtml/:link', async (req, res) => {
     //res.json(url).end()
 
     //PENTING !!! :
-    // kalau ada kata "step" maka d linknya gada 0 misalnya :   
+    // kalau ada kata "Step-9" maka d linknya gada 0 misalnya :   
     //   "https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_onion-drawing-tutorial.png",
     //   dan d ujungnya gada nomor dan "step"
     //   "https://easydrawingguides.com/wp-content/uploads/2022/12/Onion_onion-drawing-tutorial.png"
