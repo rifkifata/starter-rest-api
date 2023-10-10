@@ -116,7 +116,7 @@ app.get('/gethtml/:link', async (req, res) => {
         });
 
         const filtered = url.filter(function (str) { 
-          return str.includes("https://easydrawingguides.com/wp-content/uploads") || !str.includes("about-me") || !str.includes("logo")
+          return str.includes("https://easydrawingguides.com/wp-content/uploads") && !str.includes("about-me") && !str.includes("logo")
         });
         console.log(filtered)
         return filtered
