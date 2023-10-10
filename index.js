@@ -115,7 +115,9 @@ app.get('/gethtml/:link', async (req, res) => {
             url.push($(link).attr('src'))
         });
 
-        const filtered = url.filter(function (str) { return str.includes("https://easydrawingguides.com/wp-content/uploads")});
+        const filtered = url.filter(function (str) { 
+          return str.includes("https://easydrawingguides.com/wp-content/uploads") || !str.includes("about-me") || !str.includes("logo")
+        });
         console.log(filtered)
         return filtered
     });
