@@ -29,6 +29,7 @@ app.use(function (req, res, next) {
 });
 
 const whatsAppClient = require("@green-api/whatsapp-api-client");
+const { filter } = require('async')
 
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
@@ -115,60 +116,33 @@ app.get('/gethtml/:link', async (req, res) => {
             url.push($(link).attr('src'))
         });
 
-        const filtered = url.filter(function (str) { 
+        let filtered = url.filter(function (str) { 
           return str.includes("https://easydrawingguides.com/wp-content/uploads") && !str.includes("about-me") && !str.includes("logo")
         });
-        console.log(filtered)
+        console.log(filtered.toString())
+
+        //if filtered.includes
         return filtered
     });
     
-    // (async function main() {
-    //   try {
-    //     const browser = await puppeteer.launch();
-    //     const [page] = await browser.pages();
-    
-    //     await page.goto(link);
-    
-    //     const imgURLs = await page.evaluate(() =>
-    //       Array.from(
-    //         document.querySelectorAll('#post-2582662'),
-    //         ({ src }) => src,
-    //       )
-    //     );
-    //     console.log(imgURLs);
-    //     await browser.close();
-    
-    //     imgURLs.forEach((imgURL, i) => {
-    //       console.log(imgURL);
-    //     });
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // })();
-    
-    //TODO:jangan lupa bikin pake puppeteer harus scroll kebawah, kenapa ? karena ada lazyload 
     //tembak DB
-/*
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var $ = cheerio.load(body);
-            var reqUrl = url.parse(link);
 
-            res.send($('img').map(function (i, e) {
-                var srcUrl = url.parse($(e).attr('src'));
-
-                if (!srcUrl.host) {
-                    //return url.resolve(reqUrl, srcUrl);
-                    console.log(url.resolve(reqUrl, srcUrl));
-                } else {
-                    //return url.format(srcUrl);
-                    console.log(url.format(srcUrl));
-                }
-            }));
-        }
-    });*/
     //res.json(url).end()
-})
+
+    //PENTING !!! :
+    // kalau ada kata "step" maka d linknya gada 0 misalnya :   
+    //   "https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_onion-drawing-tutorial.png",
+    //   dan d ujungnya gada nomor dan "step"
+    //   "https://easydrawingguides.com/wp-content/uploads/2022/12/Onion_onion-drawing-tutorial.png"
+      
+    // kalau gada kata "step", maka d linknya ada 0 :
+    //   "https://easydrawingguides.com/wp-content/uploads/2018/10/Salad-09.png",
+    //    "https://easydrawingguides.com/wp-content/uploads/2018/10/Salad-10.png"
+
+    // kalau ada kata "step" maka ujung list pake nomor 
+    //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_9.png",
+    //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
+      })
 
 
 //Get all full listing
