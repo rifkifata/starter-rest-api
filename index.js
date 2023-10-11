@@ -106,8 +106,7 @@ app.get('/gethtml/:link', async (req, res) => {
         }
     };
 
-    let result 
-    request(options, function (err, resp, body) {
+    let result = request(options, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('img') 
         let url = [];
@@ -147,9 +146,8 @@ app.get('/gethtml/:link', async (req, res) => {
             arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
           }
         }
-        console.log(arr) 
-        result = arr
-        return result
+        console.log(arr)
+        return arr
     });
     
     res.json(result).end()
