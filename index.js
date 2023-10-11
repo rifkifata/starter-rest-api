@@ -125,7 +125,6 @@ app.get('/gethtml/:link', async (req, res) => {
         let arr =  [] 
 
         if (/\d/.test(trimed)==false){
-          console.log("tipe A")
           const trimedRight = filtered.split('_')[1]
           for (let i=1; i<10; i++){
             arr.push(mainPath + "Step-" + i + "_" + trimedRight) //"https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_green-beans-drawing-tutorial.png",
@@ -145,7 +144,7 @@ app.get('/gethtml/:link', async (req, res) => {
           console.log("tipe C")
           const maxStep = trimed.replace(/\D/g, '') //9
           for (let i=1; i<=maxStep; i++){
-            arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + maxStep).slice(-2)))
+            arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + maxStep).slice(-2)) + filtered.slice(-4))
           }
         }
 
