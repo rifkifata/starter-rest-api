@@ -125,6 +125,7 @@ app.get('/gethtml/:link', async (req, res) => {
         let arr =  [] 
 
         if (/\d/.test(trimed)==false){
+          console.log("tipe A")
           const trimedRight = filtered.split('_')[1]
           for (let i=1; i<10; i++){
             arr.push(mainPath + "Step-" + i + "_" + trimedRight) //"https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_green-beans-drawing-tutorial.png",
@@ -133,6 +134,7 @@ app.get('/gethtml/:link', async (req, res) => {
         }
 
         else if (filtered.includes("Step")) {
+          console.log("tipe B")
           const maxStep = trimed.replace(/\D/g, '') //9
           for (let i=1; i<maxStep+1; i++){
             arr.push(mainPath + trimed.replace(/[0-9]+/g, i)) //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
@@ -140,6 +142,7 @@ app.get('/gethtml/:link', async (req, res) => {
         }
         
         else if (!filtered.includes("Step") && /\d/.test(trimed)==true) {
+          console.log("tipe C")
           const maxStep = trimed.replace(/\D/g, '') //9
           for (let i=1; i<maxStep+1; i++){
             arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + maxStep).slice(-2)))
