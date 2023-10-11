@@ -106,7 +106,7 @@ app.get('/gethtml/:link', async (req, res) => {
         }
     };
 
-    const result ;
+    let result 
     request(options, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('img') 
