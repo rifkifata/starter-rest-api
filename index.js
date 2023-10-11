@@ -99,7 +99,6 @@ app.get('/getbykey/:col/:key', async (req, res) => {
 
 // Get HTML hyper link
 app.get('/gethtml/:link', async (req, res) => {
-    const link = 'https://easydrawingguides.com/' + req.params.link
     const options = {
         url: 'https://easydrawingguides.com/' + req.params.link,
         headers: {
