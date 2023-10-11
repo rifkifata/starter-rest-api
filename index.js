@@ -118,28 +118,30 @@ app.get('/gethtml/:link', async (req, res) => {
 
   // Post HTML hyper link to DB
 app.post('/v2/htd', async (req, res) => {
-  const pages = req.body.pages 
+  const pages = req.body.pages
+  const title = req.body.title
+  const _id = req.body._id
 
-  console.log(req.body)
-  console.log(req.body.pages)
-  // for (let i=0;i<=pages.length;i++) {
+  //TODO! : make json dan tembak ke db , jangan lupa auto "judul" ambil dari path main url dari linkpage nya  
 
-  // }
+  let result = []
 
-  // const options = {
-  //     url: 'https://easydrawingguides.com/' + req.body.pages,
-  //     headers: {
-  //         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
-  //     }
-  // }
-  // try {
-  //   let response = await doRequest(options);
-  //   console.log(response)
-  //   res.json(response).end()
-  // } catch (error) {
-  //   console.error(error)
-  // }
-  
+
+  for (let i=0;i<(pages).length;i++) {
+      const options = {
+        url: pages[i],
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
+        }
+    }
+    try {
+      let response = await doRequest(options);
+      result.push(response)
+      //res.json(response).end()
+    } catch (error) {
+      console.error(error)
+    }
+  }
 })
 
 //Get all full listing
