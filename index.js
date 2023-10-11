@@ -116,6 +116,30 @@ app.get('/gethtml/:link', async (req, res) => {
     
   })
 
+  // Post HTML hyper link to DB
+app.get('/v2/htd', async (req, res) => {
+  const pages = req.body.pages 
+
+  console.log(pages.length)
+  // for (let i=0;i<=pages.length;i++) {
+
+  // }
+
+  // const options = {
+  //     url: 'https://easydrawingguides.com/' + req.body.pages,
+  //     headers: {
+  //         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
+  //     }
+  // }
+  // try {
+  //   let response = await doRequest(options);
+  //   console.log(response)
+  //   res.json(response).end()
+  // } catch (error) {
+  //   console.error(error)
+  // }
+  
+})
 
 //Get all full listing
 /*app.get('/getfull/:col', async (req, res) => {
