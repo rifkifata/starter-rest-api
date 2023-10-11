@@ -63,7 +63,7 @@ app.post('/:col', async (req, res) => {
   //const key = req.params.key
   let key = objectId.toString()
 
-  console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
+  console.log(`from collection: ${col} post key: ${key} with params ${JSON.stringify(req.params)}`)
   const item = await db.collection(col).set(key, isi)
   console.log(JSON.stringify(item, null, 2))
   res.json(item).end()
@@ -106,6 +106,7 @@ app.get('/gethtml/:link', async (req, res) => {
         }
     };
 
+    const result ;
     request(options, function (err, resp, body) {
         $ = cheerio.load(body)
         const links = $('img') 
@@ -146,36 +147,13 @@ app.get('/gethtml/:link', async (req, res) => {
             arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
           }
         }
-
-        console.log(arr)
-        return filtered
+        console.log(arr) 
+        result = arr
+        return result
     });
     
-    //tembak DB
-
-    //res.json(url).end()
-
-    //PENTING !!! :
-    // kalau ada kata "Step-9" maka d linknya gada 0 misalnya :   
-    //   "https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_onion-drawing-tutorial.png",
-    //   dan d ujungnya gada nomor dan "step"
-    //   "https://easydrawingguides.com/wp-content/uploads/2022/12/Onion_onion-drawing-tutorial.png"
-    //  "https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_green-beans-drawing-tutorial.png",
-    //  "https://easydrawingguides.com/wp-content/uploads/2022/12/Green-Beans_green-beans-drawing-tutorial.png"
-    //  
-      
-    // kalau gada kata "step", maka d linknya ada 0 :
-    //   "https://easydrawingguides.com/wp-content/uploads/2018/10/Salad-09.png",
-    //    "https://easydrawingguides.com/wp-content/uploads/2018/10/Salad-10.png"
-
-    //"https://easydrawingguides.com/wp-content/uploads/2022/12/lady-finger-08_lady-finger-drawing-tutorial.png",
-    //"https://easydrawingguides.com/wp-content/uploads/2022/12/lady-finger-09_lady-finger-drawing-tutorial.png",
-    //"https://easydrawingguides.com/wp-content/uploads/2022/12/lady-finger-11_lady-finger-drawing-tutorial.png"
-
-    // kalau ada kata "step" maka ujung list pake nomor 
-    //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_9.png",
-    //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
-      })
+    res.json(result).end()
+    })
 
 
 //Get all full listing
