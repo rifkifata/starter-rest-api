@@ -134,11 +134,12 @@ app.get('/gethtml/:link', async (req, res) => {
         }
 
         else if (filtered.includes("Step")) {
-          console.log("tipe B")
           const maxStep = trimed.replace(/\D/g, '') //9
-          for (let i=1; i<maxStep+1; i++){
+          console.log("tipe " + maxStep)
+          for (let i=1; i<=maxStep; i++){
             arr.push(mainPath + trimed.replace(/[0-9]+/g, i)) //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
           }
+          arr.push(filtered)
         }
         
         else if (!filtered.includes("Step") && /\d/.test(trimed)==true) {
