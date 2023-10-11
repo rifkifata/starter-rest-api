@@ -124,6 +124,8 @@ app.post('/v2/htd', async (req, res) => {
 
   //TODO! : make json dan tembak ke db , jangan lupa auto "judul" ambil dari path main url dari linkpage nya  
 
+  let forbidenWord = ["easy", "how", "to", "draw", "-a-", "/", "an", "easy"]
+
   let result = []
 
 
@@ -401,6 +403,10 @@ function doRequest(options) {
         }
       }
       console.log(arr)
+
+      // ADD JUDUL
+      const judul = options.url.toString().slice(30, -1).replace("-", " ").replace("/","")
+      
       resolve(arr)
     } else {
       reject(error);
