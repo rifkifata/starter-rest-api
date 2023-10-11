@@ -359,7 +359,7 @@ app.listen(port, () => {
 function doRequest(options) {
   return new Promise(function (resolve, reject) {
     request(options, function (err, resp, body) {
-      if (!error && res.statusCode === 200) {
+      if (!err && res.statusCode === 200) {
       $ = cheerio.load(body)
       const links = $('img') 
       let url = [];
