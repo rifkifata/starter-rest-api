@@ -144,7 +144,7 @@ app.get('/gethtml/:link', async (req, res) => {
         else if (!filtered.includes("Step") && /\d/.test(trimed)==true) {
           console.log("tipe C")
           const maxStep = trimed.replace(/\D/g, '') //9
-          for (let i=1; i<maxStep+1; i++){
+          for (let i=1; i<=maxStep; i++){
             arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + maxStep).slice(-2)))
           }
         }
