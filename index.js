@@ -117,10 +117,11 @@ app.get('/gethtml/:link', async (req, res) => {
   })
 
   // Post HTML hyper link to DB
-app.get('/v2/htd', async (req, res) => {
+app.post('/v2/htd', async (req, res) => {
   const pages = req.body.pages 
 
-  console.log(pages.length)
+  console.log(req.body)
+  console.log(req.body.pages)
   // for (let i=0;i<=pages.length;i++) {
 
   // }
