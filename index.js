@@ -30,6 +30,7 @@ app.use(function (req, res, next) {
 
 const whatsAppClient = require("@green-api/whatsapp-api-client");
 const { filter } = require('async')
+const { response } = require('express')
 
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
@@ -105,53 +106,15 @@ app.get('/gethtml/:link', async (req, res) => {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
         }
     };
-
-    let result = request(options, function (err, resp, body) {
-        $ = cheerio.load(body)
-        const links = $('img') 
-        let url = [];
-
-        $(links).each(function (i, link) {
-            url.push($(link).attr('src'))
-        });
-
-        let filtered = url.filter(function (str) { 
-          return str.includes("https://easydrawingguides.com/wp-content/uploads") && !str.includes("about-me") && !str.includes("logo")
-        });
-        filtered = filtered.toString() //"https://easydrawingguides.com/wp-content/uploads/2022/12/Green-Beans_green-beans-drawing-tutorial.png"
-        const trimed = filtered.slice(57, -4) //Green-Beans_green-beans-drawing-tutorial
-        const mainPath = filtered.slice(0, 57) //https://easydrawingguides.com/wp-content/uploads/2022/12/
-        let arr =  [] 
-
-        if (/\d/.test(trimed)==false){
-          const trimedRight = filtered.split('_')[1]
-          for (let i=1; i<10; i++){
-            arr.push(mainPath + "Step-" + i + "_" + trimedRight) //"https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_green-beans-drawing-tutorial.png",
-          }
-          arr.push(filtered)
-        }
-
-        else if (filtered.includes("Step")) {
-          const maxStep = trimed.replace(/\D/g, '') //9
-          console.log("tipe " + maxStep)
-          for (let i=1; i<=maxStep; i++){
-            arr.push(mainPath + trimed.replace(/[0-9]+/g, i) + filtered.slice(-4)) //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
-          }
-        }
-        
-        else if (!filtered.includes("Step") && /\d/.test(trimed)==true) {
-          console.log("tipe C")
-          const maxStep = trimed.replace(/\D/g, '') //9
-          for (let i=1; i<=maxStep; i++){
-            arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
-          }
-        }
-        console.log(arr)
-        return arr
-    });
+    try {
+      let response = await doRequest(options);
+      console.log(response)
+      res.json(response).end()
+    } catch (error) {
+      console.error(error)
+    }
     
-    res.json(result).end()
-    })
+  })
 
 
 //Get all full listing
@@ -391,3 +354,56 @@ const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`index.js listening on ${port}`)
 })
+
+// ###################### ALL FUNCTIONS ####################
+function doRequest(options) {
+  return new Promise(function (resolve, reject) {
+    request(options, function (err, resp, body) {
+      if (!error && res.statusCode === 200) {
+      $ = cheerio.load(body)
+      const links = $('img') 
+      let url = [];
+
+      $(links).each(function (i, link) {
+          url.push($(link).attr('src'))
+      });
+
+      let filtered = url.filter(function (str) { 
+        return str.includes("https://easydrawingguides.com/wp-content/uploads") && !str.includes("about-me") && !str.includes("logo")
+      });
+      filtered = filtered.toString() //"https://easydrawingguides.com/wp-content/uploads/2022/12/Green-Beans_green-beans-drawing-tutorial.png"
+      const trimed = filtered.slice(57, -4) //Green-Beans_green-beans-drawing-tutorial
+      const mainPath = filtered.slice(0, 57) //https://easydrawingguides.com/wp-content/uploads/2022/12/
+      let arr =  [] 
+
+      if (/\d/.test(trimed)==false){
+        const trimedRight = filtered.split('_')[1]
+        for (let i=1; i<10; i++){
+          arr.push(mainPath + "Step-" + i + "_" + trimedRight) //"https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_green-beans-drawing-tutorial.png",
+        }
+        arr.push(filtered)
+      }
+
+      else if (filtered.includes("Step")) {
+        const maxStep = trimed.replace(/\D/g, '') //9
+        console.log("tipe " + maxStep)
+        for (let i=1; i<=maxStep; i++){
+          arr.push(mainPath + trimed.replace(/[0-9]+/g, i) + filtered.slice(-4)) //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
+        }
+      }
+      
+      else if (!filtered.includes("Step") && /\d/.test(trimed)==true) {
+        console.log("tipe C")
+        const maxStep = trimed.replace(/\D/g, '') //9
+        for (let i=1; i<=maxStep; i++){
+          arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
+        }
+      }
+      console.log(arr)
+      resolve(body)
+    } else {
+      reject(error);
+    }
+    });
+  });
+}
