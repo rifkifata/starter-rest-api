@@ -119,16 +119,34 @@ app.get('/gethtml/:link', async (req, res) => {
         let filtered = url.filter(function (str) { 
           return str.includes("https://easydrawingguides.com/wp-content/uploads") && !str.includes("about-me") && !str.includes("logo")
         });
-        filtered = filtered.toString()
-        let trimed = filtered.slice(57, -4);
+        filtered = filtered.toString() //"https://easydrawingguides.com/wp-content/uploads/2022/12/Green-Beans_green-beans-drawing-tutorial.png"
+        const trimed = filtered.slice(57, -4) //Green-Beans_green-beans-drawing-tutorial.png
+        const mainPath = filtered.slice(0, 57) //https://easydrawingguides.com/wp-content/uploads/2022/12/
         let arr =  [] 
 
-        if (/\d/.test(trimed)=false){
+        if (/\d/.test(trimed)==false){
+          const trimedRight = filtered.split('_')[1]
+          for (let i=1; i<10; i++){
+            arr.push(mainPath + "Step-" + i + "_" + trimedRight) //"https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_green-beans-drawing-tutorial.png",
+          }
           arr.push(filtered)
-          arr.push
         }
 
-        //if filtered.includes
+        else if (filtered.includes("Step")) {
+          const maxStep = trimed.replace(/\D/g, '') //9
+          for (let i=1; i<maxStep+1; i++){
+            arr.push(mainPath + trimed.replace(/[0-9]+/g, i)) //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
+          }
+        }
+        
+        else if (!filtered.includes("Step") && /\d/.test(trimed)==true) {
+          const maxStep = trimed.replace(/\D/g, '') //9
+          for (let i=1; i<maxStep+1; i++){
+            arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + maxStep).slice(-2)))
+          }
+        }
+
+        console.log(arr)
         return filtered
     });
     
@@ -141,10 +159,17 @@ app.get('/gethtml/:link', async (req, res) => {
     //   "https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_onion-drawing-tutorial.png",
     //   dan d ujungnya gada nomor dan "step"
     //   "https://easydrawingguides.com/wp-content/uploads/2022/12/Onion_onion-drawing-tutorial.png"
+    //  "https://easydrawingguides.com/wp-content/uploads/2022/12/Step-9_green-beans-drawing-tutorial.png",
+    //  "https://easydrawingguides.com/wp-content/uploads/2022/12/Green-Beans_green-beans-drawing-tutorial.png"
+    //  
       
     // kalau gada kata "step", maka d linknya ada 0 :
     //   "https://easydrawingguides.com/wp-content/uploads/2018/10/Salad-09.png",
     //    "https://easydrawingguides.com/wp-content/uploads/2018/10/Salad-10.png"
+
+    //"https://easydrawingguides.com/wp-content/uploads/2022/12/lady-finger-08_lady-finger-drawing-tutorial.png",
+    //"https://easydrawingguides.com/wp-content/uploads/2022/12/lady-finger-09_lady-finger-drawing-tutorial.png",
+    //"https://easydrawingguides.com/wp-content/uploads/2022/12/lady-finger-11_lady-finger-drawing-tutorial.png"
 
     // kalau ada kata "step" maka ujung list pake nomor 
     //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_9.png",
