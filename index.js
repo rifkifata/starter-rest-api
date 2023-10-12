@@ -122,32 +122,12 @@ app.get('/gethtml/:link', async (req, res) => {
 
 // Post HTML hyper link to DB
 app.post('/v2/htd', async (req, res) => {
+  const now = new Date()
   const pages = req.body.pages
   const title = req.body.title
   let _id = req.body._id
 
   let result = []
-
-  if (!_id) {
-    const items = await db.collection("htd").list()
-    let result = items.results.map(a => a.key)
-    let currentArray = []
-
-    await Promise.all(
-      result.map(async (item) => {
-        currentArray.push(await db.collection("htd").get(item))
-      })
-    )
-
-    currentArray.map(item => {
-      Object.assign(item, item.props)
-      delete item.props
-      console.log(item)
-      return item
-    })
-    currentArray.sort((a, b) => (a.CyclicItem._id > b.CyclicItem._id) ? 1 : ((b.CyclicItem._id > a.CyclicItem._id) ? -1 : 0))
-    console.log(currentArray)
-  }
 
   for (let i = 0; i < (pages).length; i++) {
     const options = {
@@ -159,11 +139,23 @@ app.post('/v2/htd', async (req, res) => {
     try {
       let response = await doRequest(options);
       result.push(response)
-      //res.json(response).end()
     } catch (error) {
       console.error(error)
     }
   }
+
+  const finalResult = {
+    "child": result,
+    "_id": _id,
+    "title": title,
+    "createdAt": now.toISOString(),
+    "updatedAt": now.toISOString()
+  }
+
+  const objectId = new ObjectID()
+  const item = await db.collection("htd").set(objectId.toString(), finalResult)
+  console.log(JSON.stringify(item, null, 2))
+  res.json(item).end()
 })
 
 //Get all full listing
