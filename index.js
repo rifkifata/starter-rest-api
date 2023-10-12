@@ -403,12 +403,12 @@ function doRequest(options) {
         }
       }
       console.log(arr)
-      let forbidenWord = ["easy", "how", "to", "draw", "-a-", "/", "an", "easy"]
       // ADD JUDUL
       let judul = options.url.toString().slice(30, -1).replace("/","").replaceAll("-"," ").replace("how to draw a", "").replace("how to draw an","").replace("easy","")
-      console.log(judul);
       
-      resolve(arr)
+      const merged = {"judul" : judul,"images" : arr}
+      console.log(merged)
+      resolve(merged)
     } else {
       reject(err);
     }
