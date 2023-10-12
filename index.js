@@ -415,7 +415,7 @@ function doRequest(options) {
 
         //check isi array ga 404
         for (let i = 0; i <= arr.length; i++) {
-          request(path, function (err, res, body) {
+          request(arr[i], function (err, res, body) {
             if (err) {
               arr.splice(i, 1)
             }
