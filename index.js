@@ -137,11 +137,11 @@ app.post('/v2/htd', async (req, res) => {
 
   currentArray.map(item => {
     Object.assign(item, item.props)
-    delete item.props;
+    delete item.props
+    console.log(item)
+    item.sort((a, b) => a._id.localeCompare(b._id))
     return item
   })
-
-  console.log(currentArray)
 
   }
 
