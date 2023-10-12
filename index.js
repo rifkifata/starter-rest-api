@@ -414,13 +414,14 @@ function doRequest(options) {
         }
 
         //check isi array ga 404
-        for (let i = 0; i <= arr.length; i++) {
-          request(arr[i], function (err, res, body) {
-            if (err) {
-              arr.splice(i, 1)
-            }
-          });
-        }
+        //TODO PERBAIKI
+        // for (let i = 0; i <= arr.length; i++) {
+        //   request(arr[i], function (err, res, body) {
+        //     if (err) {
+        //       arr.splice(i, 1)
+        //     }
+        //   });
+        // }
 
         // ADD JUDUL
         let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-", "").replace("easy", "").replaceAll("-", " ").trimStart()
