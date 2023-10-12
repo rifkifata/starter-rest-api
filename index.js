@@ -147,6 +147,7 @@ app.post('/v2/htd', async (req, res) => {
     })
 
     currentArray.sort((a, b) => a._id.localeCompare(b._id))
+    console.log(currentArray)
   }
 
   for (let i = 0; i < (pages).length; i++) {
