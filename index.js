@@ -392,6 +392,7 @@ function doRequest(options) {
         filtered = filtered.toString() //"https://easydrawingguides.com/wp-content/uploads/2022/12/Green-Beans_green-beans-drawing-tutorial.png"
         const trimed = filtered.slice(57, -4) //Green-Beans_green-beans-drawing-tutorial
         const mainPath = filtered.slice(0, 57) //https://easydrawingguides.com/wp-content/uploads/2022/12/
+
         let arr = []
 
         if (/\d/.test(trimed) == false) {
@@ -411,6 +412,16 @@ function doRequest(options) {
             arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
           }
         }
+
+        //check isi array ga 404
+        for (let i = 0; i <= arr.length; i++) {
+          request(path, function (err, res, body) {
+            if (err) {
+              arr.splice(i, 1)
+            }
+          });
+        }
+
         // ADD JUDUL
         let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-", "").replace("easy", "").replaceAll("-", " ").trimStart()
         judul = titleCase(judul)
