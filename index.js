@@ -145,7 +145,7 @@ app.post('/v2/htd', async (req, res) => {
       console.log(item)
       return item
     })
-    currentArray.sort((a, b) => (a._id > b._id) ? 1 : ((b._id > a._id) ? -1 : 0))
+    currentArray.sort((a, b) => (a.CyclicItem._id > b.CyclicItem._id) ? 1 : ((b.CyclicItem._id > a.CyclicItem._id) ? -1 : 0))
     console.log(currentArray)
   }
 
