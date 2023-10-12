@@ -412,7 +412,9 @@ function doRequest(options) {
           }
         }
         // ADD JUDUL
-        let judul = options.url.toString().slice(30, -1).replace("/", "").replaceAll("-", " ").replace("how to draw a", "").replace("how to draw an", "").replace("easy", "")
+        let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-").replace("easy", "").replaceAll("-", " ").trimStart()
+        judul = titleCase(judul)
+
         const merged = {
           "judul": judul,
           "images": arr
@@ -423,6 +425,14 @@ function doRequest(options) {
       }
     });
   });
+}
+
+function titleCase(str) {
+  let splitStr = str.toLowerCase().split(' ');
+  for (let i = 0; i < splitStr.length; i++) {
+    splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+  }
+  return splitStr.join(' ');
 }
 
 
