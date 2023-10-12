@@ -120,14 +120,30 @@ app.get('/gethtml/:link', async (req, res) => {
 app.post('/v2/htd', async (req, res) => {
   const pages = req.body.pages
   const title = req.body.title
-  const _id = req.body._id
-
-  //TODO! : make json dan tembak ke db , jangan lupa auto "judul" ambil dari path main url dari linkpage nya  
-
-  
+  let _id = req.body._id
 
   let result = []
 
+  if (!_id) {
+  const items = await db.collection(col).list()
+  let result = items.results.map(a => a.key)
+  let currentArray = []
+
+  await Promise.all(
+    result.map(async (item) => {
+      currentArray.push(await db.collection(col).get(item))
+    })
+  )
+
+  currentArray.map(item => {
+    Object.assign(item, item.props)
+    delete item.props;
+    return item
+  })
+
+  console.log(currentArray)
+
+  }
 
   for (let i=0;i<(pages).length;i++) {
       const options = {
@@ -402,12 +418,9 @@ function doRequest(options) {
           arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
         }
       }
-      console.log(arr)
       // ADD JUDUL
       let judul = options.url.toString().slice(30, -1).replace("/","").replaceAll("-"," ").replace("how to draw a", "").replace("how to draw an","").replace("easy","")
-      
       const merged = {"judul" : judul,"images" : arr}
-      console.log(merged)
       resolve(merged)
     } else {
       reject(err);
