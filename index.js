@@ -406,10 +406,11 @@ function doRequest(options) {
 
       // ADD JUDUL
       const judul = options.url.toString().slice(30, -1).replace("-", " ").replace("/","")
+      console.log(judul);
       
       resolve(arr)
     } else {
-      reject(error);
+      reject(err);
     }
     });
   });
