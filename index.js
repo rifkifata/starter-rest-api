@@ -412,8 +412,9 @@ function doRequest(options) {
           }
         }
         // ADD JUDUL
-        let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-").replace("easy", "").replaceAll("-", " ").trimStart()
+        let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-", "").replace("easy", "").replaceAll("-", " ").trimStart()
         judul = titleCase(judul)
+        //https://easydrawingguides.com/how-to-draw-grim-reaper/
 
         const merged = {
           "judul": judul,
