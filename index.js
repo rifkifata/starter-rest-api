@@ -145,8 +145,7 @@ app.post('/v2/htd', async (req, res) => {
       console.log(item)
       return item
     })
-
-    currentArray.sort((a, b) => a._id.localeCompare(b._id))
+    currentArray.sort((a, b) => (a._id > b._id) ? 1 : ((b._id > a._id) ? -1 : 0))
     console.log(currentArray)
   }
 
