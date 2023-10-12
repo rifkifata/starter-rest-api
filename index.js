@@ -125,13 +125,13 @@ app.post('/v2/htd', async (req, res) => {
   let result = []
 
   if (!_id) {
-  const items = await db.collection(col).list()
+  const items = await db.collection("htd").list()
   let result = items.results.map(a => a.key)
   let currentArray = []
 
   await Promise.all(
     result.map(async (item) => {
-      currentArray.push(await db.collection(col).get(item))
+      currentArray.push(await db.collection("htd").get(item))
     })
   )
 
