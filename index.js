@@ -405,7 +405,7 @@ function doRequest(options) {
       console.log(arr)
 
       // ADD JUDUL
-      const judul = options.url.toString().slice(30, -1).replace("-", " ").replace("/","")
+      const judul = options.url.toString().slice(30, -1).replace("/","")
       console.log(judul);
       
       resolve(arr)
