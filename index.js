@@ -413,24 +413,6 @@ function doRequest(options) {
           }
         }
 
-        //check isi array ga 404
-        for (let i = 0; i <= arr.length; i++) {
-          let options = {
-            url: await arr[i],
-            method: 'GET',
-            encoding: null
-          };
-
-          request(options, function (error, response, body) {
-            // if (error) {
-            //   arr.splice(i, 1)
-            // }
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('body:', body); // Print the HTML for the Google homepage.
-          });
-        }
-
         // ADD JUDUL
         let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-", "").replace("easy", "").replaceAll("-", " ").trimStart()
         judul = titleCase(judul)
