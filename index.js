@@ -422,19 +422,15 @@ function doRequest(options) {
           };
 
           request(options, function (error, response, body) {
-            res.set('Content-Type', 'image/png');
-            res.send(body);
             if (error) {
               arr.splice(i, 1)
             }
           });
-
         }
 
         // ADD JUDUL
         let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-", "").replace("easy", "").replaceAll("-", " ").trimStart()
         judul = titleCase(judul)
-        //https://easydrawingguides.com/how-to-draw-grim-reaper/
 
         const merged = {
           "judul": judul,
