@@ -416,7 +416,7 @@ function doRequest(options) {
         //check isi array ga 404
         for (let i = 0; i <= arr.length; i++) {
           let options = {
-            url: arr[i],
+            url: await arr[i],
             method: 'GET',
             encoding: null
           };
