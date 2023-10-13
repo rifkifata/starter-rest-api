@@ -422,9 +422,10 @@ function doRequest(options) {
           };
 
           request(options, function (error, response, body) {
-            if (error) {
-              arr.splice(i, 1)
-            }
+            // if (error) {
+            //   arr.splice(i, 1)
+            // }
+            console.log(response.statusCode)
           });
         }
 
