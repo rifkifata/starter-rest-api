@@ -415,12 +415,20 @@ function doRequest(options) {
 
         //check isi array ga 404
         for (let i = 0; i <= arr.length; i++) {
-          console.log(arr[i])
-          // request(arr[i], function (err, res, body) {
-          //   if (err) {
-          //     arr.splice(i, 1)
-          //   }
-          // });
+          let options = {
+            url: arr[i],
+            method: 'GET',
+            encoding: null
+          };
+
+          request(options, function (error, response, body) {
+            res.set('Content-Type', 'image/png');
+            res.send(body);
+            if (error) {
+              arr.splice(i, 1)
+            }
+          });
+
         }
 
         // ADD JUDUL
