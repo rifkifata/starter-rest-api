@@ -408,9 +408,17 @@ function doRequest(options) {
           }
         } else if (!filtered.includes("Step") && /\d/.test(trimed) == true) {
           const maxStep = trimed.replace(/\D/g, '') //9
-          for (let i = 1; i <= maxStep; i++) {
-            arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
+          if (maxStep == 11) {
+            for (let i = 1; i <= maxStep; i++) {
+              if (y[i] == 10) continue
+              arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
+            }
+          } else {
+            for (let i = 1; i <= maxStep; i++) {
+              arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
+            }
           }
+
         }
 
         // ADD JUDUL
