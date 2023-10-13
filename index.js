@@ -410,7 +410,7 @@ function doRequest(options) {
           const maxStep = trimed.replace(/\D/g, '') //9
           if (maxStep == 11) {
             for (let i = 1; i <= maxStep; i++) {
-              if (y[i] == 10) continue
+              if (i == 10) continue
               arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4))
             }
           } else {
