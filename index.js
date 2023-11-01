@@ -404,7 +404,7 @@ function doRequest(options) {
         } else if (filtered.includes("Step")) {
           const maxStep = trimed.replace(/\D/g, '') //9
           for (let i = 1; i <= maxStep; i++) {
-            arr.push(mainPath + trimed.replace(/[0-9]+/g, i) + filtered.slice(-4)) //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
+            arr.push(mainPath + trimed.replace(/[0-9]+/g, ("0" + i).slice(-2)) + filtered.slice(-4)) //"https://easydrawingguides.com/wp-content/uploads/2022/11/Peas_Step_by_Step_Drawing_Tutorials_Step_10.png"
           }
         } else if (!filtered.includes("Step") && /\d/.test(trimed) == true) {
           const maxStep = trimed.replace(/\D/g, '') //9
