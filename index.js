@@ -422,7 +422,7 @@ function doRequest(options) {
         }
 
         // ADD JUDUL Really  Drawing Tutorial"
-        let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-", "").replace("easy", "").replace("really", "").replace("drawing", "").replace("tutorial", "").replaceAll("-", " ").trimStart()
+        let judul = options.url.toString().slice(30, -1).replace("/", "").replace("how-to-draw-a-", "").replace("how-to-draw-an-", "").replace("how-to-draw-", "").replace("easy", "").replace("really", "").replace("drawing", "").replace("tutorial", "").replaceAll("-", " ").trim()
         judul = titleCase(judul)
 
         const merged = {
