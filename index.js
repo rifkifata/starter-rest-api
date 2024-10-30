@@ -152,10 +152,12 @@ app.post('/v2/htd', async (req, res) => {
     "updatedAt": now.toISOString()
   }
 
-  const objectId = new ObjectID()
-  const item = await db.collection("htd").set(objectId.toString(), finalResult)
-  console.log(JSON.stringify(item, null, 2))
-  res.json(item).end()
+  //const objectId = new ObjectID()
+  //const item = await db.collection("htd").set(objectId.toString(), finalResult)
+  //console.log(JSON.stringify(item, null, 2))
+  console.log(JSON.stringify(finalResult, null, 2))
+  res.json(finalResult).end()
+
 })
 
 //Get all full listing
